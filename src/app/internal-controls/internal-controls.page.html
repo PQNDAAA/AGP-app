@@ -4,7 +4,24 @@
     <ion-card-header>
       <ion-card-title>Ajouter un contrôle</ion-card-title>
     </ion-card-header>
-    <ion-card-content>Controler</ion-card-content>
+    <ion-card-content>
+      <ion-list class="form-list">
+          <ion-input label-placement="floating" fill="outline" label="Nom de l'agent" name="agent-name"></ion-input>
+          <ion-input label-placement="floating" fill="outline" label="Nom du site" name="site-name"></ion-input>
+
+        <div *ngFor="let segment of segmentList">
+          <ion-item>
+            <ion-label>{{segment.name}}</ion-label>
+          </ion-item>
+        </div>
+
+
+      </ion-list>
+      <ion-button slot="end">
+        <ion-icon name="add-outline"></ion-icon>
+        <ion-label>Créer l'entrée</ion-label>
+      </ion-button>
+    </ion-card-content>
   </ion-card>
     <ion-card>
       <ion-card-header>
