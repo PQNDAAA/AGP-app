@@ -9,11 +9,15 @@
           <ion-input label-placement="floating" fill="outline" label="Nom de l'agent" name="agent-name"></ion-input>
           <ion-input label-placement="floating" fill="outline" label="Nom du site" name="site-name"></ion-input>
 
-        <div *ngFor="let segment of segmentList">
-          <ion-item>
+        <ion-list *ngFor="let segment of segmentList" class="segmentList">
+          <div class="segmentItem">
             <ion-label>{{segment.name}}</ion-label>
-          </ion-item>
-        </div>
+            <ion-segment value="false">
+                <ion-segment-button value="true">Oui</ion-segment-button>
+                <ion-segment-button value="false">Non</ion-segment-button>
+            </ion-segment>
+          </div>
+        </ion-list>
 
 
       </ion-list>
