@@ -25,15 +25,20 @@ ion-card{
 }
 
 ion-input{
-  text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1.6px;
   font-weight: 600;
 
-  --color: #5F6B77;
+  --color: white;
+  --placeholder-color: #999;
   width: 50%;
 
  flex: 1 1 300px;
+}
+
+.ion-input-label-text{
+  text-transform: uppercase;
+  color: #5F6B77;
 }
 
 .segmentList{
@@ -49,10 +54,24 @@ ion-input{
   gap: 10px;
 
   text-transform: uppercase;
+  color: #5F6B77;
   font-size: 12px;
+  font-weight: 600;
+}
+
+ion-segment-button{
+  --background-hover: transparent;
+  --color-hover: white;
+}
+ion-segment-button[value="true"]{
+  --color-checked: green;
+}
+ion-segment-button[value="false"]{
+  --color-checked: red;
 }
 
 ion-button {
+
   margin-top: 6%;
   ion-label{
     font-weight: 600;

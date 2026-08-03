@@ -6,8 +6,12 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list class="form-list">
-          <ion-input label-placement="floating" fill="outline" label="Nom de l'agent" name="agent-name"></ion-input>
-          <ion-input label-placement="floating" fill="outline" label="Nom du site" name="site-name"></ion-input>
+          <ion-input label-placement="floating" fill="outline" name="agent-name">
+            <div slot="label" class="ion-input-label-text">Nom de l'agent</div>
+          </ion-input>
+          <ion-input label-placement="floating" fill="outline" name="site-name">
+            <div slot="label" class="ion-input-label-text">Nom du site</div>
+          </ion-input>
 
         <ion-list *ngFor="let segment of segmentList" class="segmentList">
           <div class="segmentItem">
