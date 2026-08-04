@@ -16,6 +16,8 @@ ion-card-title{
 ion-card{
   width: 70%;
   border-radius: 10px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .form-list{
@@ -25,15 +27,20 @@ ion-card{
 }
 
 ion-input{
+  flex: 1 1 200px;
+}
+ion-textarea{
+  flex: 1 1 100%;
+}
+
+ion-input, ion-textarea{
+  --background: #171717;
   font-size: 12px;
   letter-spacing: 1.6px;
   font-weight: 600;
 
   --color: white;
   --placeholder-color: #999;
-  width: 50%;
-
- flex: 1 1 300px;
 }
 
 .ion-input-label-text{
@@ -42,7 +49,7 @@ ion-input{
 }
 
 .segmentList{
-  flex: 1 1 300px;
+  flex: 1 1 150px;
 }
 
 .segmentItem{
@@ -59,19 +66,48 @@ ion-input{
   font-weight: 600;
 }
 
+ion-segment{
+  --background: #171717;
+  border: 1px solid #4b4e55;
+  border-radius: 8px;
+  padding: 6px;
+}
+
 ion-segment-button{
   --background-hover: transparent;
   --color-hover: white;
+  --border-radius: 10px;
+
+  min-height: 34px;
+
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+//L'indicateur sur le segment
+ion-segment-button::part(indicator){
+  height: 100%;
+}
+//Le background de l'indicateur il gere (background;border etc)
+ion-segment-button::part(indicator-background){
+  height: 100%;
+  border-radius: 8px;
+}
+
+ion-segment-button[value="true"]::part(indicator-background){
+  background: rgb(0 255 0 / 0.12);
+}
+ion-segment-button[value="false"]::part(indicator-background){
+  background: rgb(255 0 0 / 0.12);
 }
 ion-segment-button[value="true"]{
-  --color-checked: green;
+  --color-checked: #00ff00;
 }
 ion-segment-button[value="false"]{
   --color-checked: red;
 }
 
 ion-button {
-
   margin-top: 6%;
   ion-label{
     font-weight: 600;
