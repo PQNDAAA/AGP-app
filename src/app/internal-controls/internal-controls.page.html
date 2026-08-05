@@ -6,6 +6,19 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list class="form-list">
+        <div class="date-container">
+          <ion-label class="date-label">Date</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        </div>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime presentation="date" id="datetime">
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+
+
           <ion-input label-placement="floating" fill="outline" name="agent-name">
             <div slot="label" class="ion-input-label-text">Nom de l'agent</div>
           </ion-input>
