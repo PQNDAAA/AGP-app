@@ -9,3 +9,15 @@ export interface InternalControlEntry {
   pti: boolean;
   comment:string;
 }
+
+export const InternalControlEntryDefaultSettings: InternalControlEntry = {
+  agentName: "",
+  domainName: "",
+  entryDate: "",
+  equipment: false,
+  professionalCard: false,
+  requiredWorkClothing: false,
+  workstationSetup: false,
+  pti: false,
+  comment: "",
+}

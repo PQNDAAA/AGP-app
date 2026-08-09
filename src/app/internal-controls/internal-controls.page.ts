@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormSegment} from "../interface/form-segment";
+import {InternalControlEntry, InternalControlEntryDefaultSettings} from "../interface/internal-control-entry";
+import {BehaviorSubject, Observable} from "rxjs";
+import {InternalControlsService} from "../services/internal-controls-service";
 
 @Component({
   selector: 'app-internal-controls',
@@ -8,6 +11,10 @@ import {FormSegment} from "../interface/form-segment";
   standalone: false
 })
 export class InternalControlsPage implements OnInit {
+
+  internalControls$: Observable<InternalControlEntry[]>;
+
+  internalControlEntry: InternalControlEntry = InternalControlEntryDefaultSettings;
 
   segmentList: FormSegment[] = [
     {
@@ -27,9 +34,21 @@ export class InternalControlsPage implements OnInit {
     }
   ];
 
-  constructor() { }
+  // eslint-disable-next-line @angular-eslint/prefer-inject
+  constructor(private icService: InternalControlsService) {
+    this.internalControls$ = this.icService.internalControls$;
+  }
 
   ngOnInit() {
+  }
+
+  async test(){
+    this.icService.addIC(this.internalControlEntry);
+    this.internalControlEntry = {...this.internalControlEntry, agentName: ""};
+  }
+
+  get numberOfIC(){
+    return this.icService.icsLength;
   }
 
 }
