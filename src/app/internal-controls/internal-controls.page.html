@@ -22,14 +22,14 @@
           <ion-input label-placement="floating" fill="outline" name="agent-name" [(ngModel)]="internalControlEntry.agentName">
             <div slot="label" class="ion-input-label-text">Nom de l'agent</div>
           </ion-input>
-          <ion-input label-placement="floating" fill="outline" name="site-name">
+          <ion-input label-placement="floating" fill="outline" name="site-name" [(ngModel)]="internalControlEntry.domainName">
             <div slot="label" class="ion-input-label-text">Nom du site</div>
           </ion-input>
 
         <ion-list *ngFor="let segment of segmentList" class="segmentList">
           <div class="segmentItem">
             <ion-label>{{segment.name}}</ion-label>
-            <ion-segment value="false">
+            <ion-segment value="false" (ionChange)="segmentChange($event, segment.id)">
                 <ion-segment-button value="true">Oui</ion-segment-button>
                 <ion-segment-button value="false">Non</ion-segment-button>
             </ion-segment>
@@ -54,9 +54,27 @@
         <ion-card-subtitle>{{numberOfIC}} entrées</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-item *ngFor="let internalControlName of internalControls$ | async">
-          {{internalControlName.agentName}}
-        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>Date</ion-col>
+            <ion-col>Agent</ion-col>
+            <ion-col>Site</ion-col>
+
+            <div *ngFor="let segment of segmentList" class="segmentListGrid">
+              <ion-col>{{segment.name}}</ion-col>
+            </div>
+
+            <ion-col>Observation</ion-col>
+          </ion-row>
+
+          <div *ngFor="let internalControl of internalControls$ | async">
+            <ion-row>
+              <ion-col>{{internalControl.agentName}}</ion-col>
+              <ion-col>{{internalControl.domainName}}</ion-col>
+            </ion-row>
+          </div>
+
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </div>
