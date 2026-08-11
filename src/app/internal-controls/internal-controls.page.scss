@@ -156,6 +156,59 @@ ion-button {
   }
 }
 
+.control-history-card{
+  overflow-x: auto;
+}
+
+ion-grid{
+  width: max-content;
+  min-width: 100%;
+
+  border: 1px solid #4b4e55;
+  background: #171717;
+  border-radius: 8px;
+}
+
+.mainElements-row{
+  border-bottom: 1px solid #4b4e55;
+  padding: 6px 0 6px 0;
+  text-transform: uppercase;
+}
+
+.elements-row{
+  padding: 6px 0 6px 0;
+  border-bottom: 1px solid #4b4e55;
+}
+
+.elements-row:last-child{
+  border-bottom: none;
+}
+
+.agentName-col{
+  color: white;
+}
+
+.segmentValue-col{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+ion-row{
+  flex-wrap: nowrap;
+  width: max-content;
+  align-items: center;
+}
+
+ion-col{
+  color: #5F6B77;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  flex: 0 0 auto;
+  width: 150px;
+}
 
 .segmentListGrid{
   display: flex;

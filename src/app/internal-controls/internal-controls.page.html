@@ -48,14 +48,15 @@
       </ion-button>
     </ion-card-content>
   </ion-card>
-    <ion-card>
+    <ion-card class="control-history-card">
       <ion-card-header>
         <ion-card-title>Historique des contrôles</ion-card-title>
         <ion-card-subtitle>{{numberOfIC}} entrées</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
+
         <ion-grid>
-          <ion-row>
+          <ion-row class="mainElements-row">
             <ion-col>Date</ion-col>
             <ion-col>Agent</ion-col>
             <ion-col>Site</ion-col>
@@ -67,14 +68,24 @@
             <ion-col>Observation</ion-col>
           </ion-row>
 
-          <div *ngFor="let internalControl of internalControls$ | async">
-            <ion-row>
-              <ion-col>{{internalControl.agentName}}</ion-col>
+          <ng-container *ngFor="let internalControl of internalControls$ | async">
+            <ion-row class="elements-row">
+              <ion-col>{{internalControl.entryDate}}</ion-col>
+              <ion-col class="agentName-col">{{internalControl.agentName}}</ion-col>
               <ion-col>{{internalControl.domainName}}</ion-col>
-            </ion-row>
-          </div>
 
+              <div *ngFor="let segment of internalControl.segmentList" class="segmentListGrid">
+                <ion-col class="segmentValue-col">
+                  <ion-icon name="radio-button-off-outline"></ion-icon>
+                  <ion-label *ngIf="segment.value">Oui</ion-label>
+                </ion-col>
+              </div>
+
+              <ion-col>{{internalControl.comment}}</ion-col>
+            </ion-row>
+          </ng-container>
         </ion-grid>
+
       </ion-card-content>
     </ion-card>
   </div>
