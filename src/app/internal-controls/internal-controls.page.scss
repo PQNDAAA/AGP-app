@@ -9,6 +9,8 @@ ion-card-title{
   align-items: center;
   justify-content: center;
 
+  margin-top: 10vh;
+
   height: 100vh;
   }
 
@@ -157,6 +159,7 @@ ion-button {
 }
 
 .control-history-card{
+  max-height: 300px;
   overflow-x: auto;
 }
 
