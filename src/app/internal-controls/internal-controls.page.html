@@ -13,7 +13,7 @@
 
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
-            <ion-datetime presentation="date" id="datetime">
+            <ion-datetime presentation="date" id="datetime" [(ngModel)]="internalControlEntry.entryDate">
             </ion-datetime>
           </ng-template>
         </ion-modal>
@@ -36,13 +36,13 @@
           </div>
         </ion-list>
 
-        <ion-textarea label-placement="floating" fill="outline">
+        <ion-textarea label-placement="floating" fill="outline" [(ngModel)]="internalControlEntry.comment">
           <div slot="label" class="ion-input-label-text">Observation</div>
         </ion-textarea>
 
 
       </ion-list>
-      <ion-button slot="end" (click)="test()">
+      <ion-button slot="end" (click)="addInternalControl()">
         <ion-icon name="add-outline"></ion-icon>
         <ion-label>Créer l'entrée</ion-label>
       </ion-button>
@@ -70,7 +70,7 @@
 
           <ng-container *ngFor="let internalControl of internalControls$ | async">
             <ion-row class="elements-row">
-              <ion-col>{{internalControl.entryDate}}</ion-col>
+              <ion-col>{{internalControl.entryDateDisplay}}</ion-col>
               <ion-col class="agentName-col">{{internalControl.agentName}}</ion-col>
               <ion-col>{{internalControl.domainName}}</ion-col>
 

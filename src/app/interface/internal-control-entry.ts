@@ -4,6 +4,7 @@ export interface InternalControlEntry {
   agentName: string;
   domainName: string;
   entryDate: string;
+  entryDateDisplay: string;
   segmentList: FormSegment[];
   comment:string;
 }
@@ -11,7 +12,8 @@ export interface InternalControlEntry {
 export const InternalControlEntryDefaultSettings: InternalControlEntry = {
   agentName: "",
   domainName: "",
-  entryDate: "",
+  entryDate: new Date().toISOString(),
+  entryDateDisplay: "",
   segmentList: formSegmentDefaultSettings,
   comment: "",
 }

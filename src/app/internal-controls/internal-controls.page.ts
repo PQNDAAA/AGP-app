@@ -26,9 +26,9 @@ export class InternalControlsPage implements OnInit {
   ngOnInit() {
   }
 
-  async test(){
+  async addInternalControl(){
+    this.internalControlEntry.entryDateDisplay = this.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
     this.icService.addIC(this.internalControlEntry);
-    this.internalControlEntry = {...this.internalControlEntry, agentName: ""};
   }
 
   segmentChange(e: any, id: number) {
@@ -42,12 +42,16 @@ export class InternalControlsPage implements OnInit {
     targetFormSegment.value = value;
     currentFormSegment[index] = targetFormSegment;
     this.internalControlEntry.segmentList = currentFormSegment;
+
     console.log(currentFormSegment);
-    console.log("Ion segment n°" + id, value);
   }
 
   get numberOfIC(){
     return this.icService.icsLength;
+  }
+
+  convertISOtoLocaleDateString(isoString: string){
+    return new Date(isoString).toLocaleDateString();
   }
 
 }

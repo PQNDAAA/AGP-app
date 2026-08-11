@@ -23,7 +23,6 @@ export class InternalControlsService {
     return this.internalControls.length;
   }
 
-
    refreshIC(){
     this.internalControlsSubject.next(this.internalControls);
     console.log("Refreshing IC...", this.internalControlsSubject.value);
