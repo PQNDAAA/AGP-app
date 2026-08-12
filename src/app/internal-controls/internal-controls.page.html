@@ -1,57 +1,73 @@
 <ion-content [fullscreen]="true">
   <div class="center-wrapper">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Ajouter un contrôle</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list class="form-list">
-        <div class="date-container">
-          <ion-label class="date-label">Date</ion-label>
-          <ion-datetime-button datetime="datetime"></ion-datetime-button>
-        </div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Ajouter un contrôle</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #internalcontrolForm="ngForm">
+          <ion-list class="form-list">
+            <div class="date-container">
+              <ion-label class="date-label">Date</ion-label>
+              <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            </div>
 
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime presentation="date" id="datetime" [(ngModel)]="internalControlEntry.entryDate">
-            </ion-datetime>
-          </ng-template>
-        </ion-modal>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime presentation="date" id="datetime" [(ngModel)]="internalControlEntry.entryDate">
+                </ion-datetime>
+              </ng-template>
+            </ion-modal>
 
-
-          <ion-input label-placement="floating" fill="outline" name="agent-name" [(ngModel)]="internalControlEntry.agentName">
-            <div slot="label" class="ion-input-label-text">Nom de l'agent</div>
-          </ion-input>
-          <ion-input label-placement="floating" fill="outline" name="site-name" [(ngModel)]="internalControlEntry.domainName">
-            <div slot="label" class="ion-input-label-text">Nom du site</div>
-          </ion-input>
-
-        <ion-list *ngFor="let segment of segmentList" class="segmentList">
-          <div class="segmentItem">
-            <ion-label>{{segment.name}}</ion-label>
-            <ion-segment value="false" (ionChange)="segmentChange($event, segment.id)">
-                <ion-segment-button value="true">Oui</ion-segment-button>
-                <ion-segment-button value="false">Non</ion-segment-button>
-            </ion-segment>
-          </div>
-        </ion-list>
-
-        <ion-textarea label-placement="floating" fill="outline" [(ngModel)]="internalControlEntry.comment">
-          <div slot="label" class="ion-input-label-text">Observation</div>
-        </ion-textarea>
-
-
-      </ion-list>
-      <ion-button slot="end" (click)="addInternalControl()">
-        <ion-icon name="add-outline"></ion-icon>
-        <ion-label>Créer l'entrée</ion-label>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+            <div class="warning-container">
+              <ion-input label-placement="floating" fill="outline" name="agent-name"
+                         [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)">
+                <div slot="label" class="ion-input-label-text">Nom de l'agent *</div>
+              </ion-input>
+              <ion-label *ngIf="inputIsTouched('agent-name') && internalControlEntry.agentName.length === 0">Ce champ
+                est obligatoire.
+              </ion-label>
+            </div>
+            <div class="warning-container">
+              <ion-input label-placement="floating" fill="outline" name="domain-name"
+                         [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)">
+                <div slot="label" class="ion-input-label-text">Nom du site *</div>
+              </ion-input>
+              <ion-label *ngIf="inputIsTouched('domain-name') && internalControlEntry.domainName.length === 0">Ce champ
+                est obligatoire.
+              </ion-label>
+            </div>
+            <ion-list *ngFor="let segment of segmentList" class="segmentList">
+              <div class="segmentItem">
+                <ion-label>{{ segment.name }}</ion-label>
+                <ion-segment value="false" (ionChange)="segmentChange($event, segment.id)">
+                  <ion-segment-button value="true">Oui</ion-segment-button>
+                  <ion-segment-button value="false">Non</ion-segment-button>
+                </ion-segment>
+              </div>
+            </ion-list>
+            <div class="warning-container">
+              <ion-textarea label-placement="floating" fill="outline" [(ngModel)]="internalControlEntry.comment"
+                            name="comment" (ionBlur)="inputBlur($event)" [required]="true">
+                <div slot="label" class="ion-input-label-text">Observation *</div>
+              </ion-textarea>
+              <ion-label *ngIf="inputIsTouched('comment') && internalControlEntry.comment.length === 0">Ce champ est
+                obligatoire.
+              </ion-label>
+            </div>
+          </ion-list>
+        </form>
+        <ion-button slot="end" [disabled]="!internalcontrolForm.valid"
+                    (click)="addInternalControl(internalcontrolForm)">
+          <ion-icon name="add-outline"></ion-icon>
+          <ion-label>Créer l'entrée</ion-label>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
     <ion-card class="control-history-card">
       <ion-card-header>
         <ion-card-title>Historique des contrôles</ion-card-title>
-        <ion-card-subtitle>{{numberOfIC}} entrées</ion-card-subtitle>
+        <ion-card-subtitle>{{ numberOfIC }} entrées</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
 
@@ -62,7 +78,7 @@
             <ion-col>Site</ion-col>
 
             <div *ngFor="let segment of segmentList" class="segmentListGrid">
-              <ion-col>{{segment.name}}</ion-col>
+              <ion-col>{{ segment.name }}</ion-col>
             </div>
 
             <ion-col>Observation</ion-col>
@@ -70,18 +86,18 @@
 
           <ng-container *ngFor="let internalControl of internalControls$ | async">
             <ion-row class="elements-row">
-              <ion-col>{{internalControl.entryDateDisplay}}</ion-col>
-              <ion-col class="agentName-col">{{internalControl.agentName}}</ion-col>
-              <ion-col>{{internalControl.domainName}}</ion-col>
+              <ion-col>{{ internalControl.entryDateDisplay }}</ion-col>
+              <ion-col class="agentName-col">{{ internalControl.agentName }}</ion-col>
+              <ion-col>{{ internalControl.domainName }}</ion-col>
 
               <div *ngFor="let segment of internalControl.segmentList" class="segmentListGrid">
                 <ion-col class="segmentValue-col" [style]="segment.value ? 'color: green' : 'color: red'">
                   <ion-icon name="radio-button-off-outline"></ion-icon>
-                  <ion-label>{{segment.value ? 'Oui' : 'Non'}}</ion-label>
+                  <ion-label>{{ segment.value ? 'Oui' : 'Non' }}</ion-label>
                 </ion-col>
               </div>
 
-              <ion-col>{{internalControl.comment}}</ion-col>
+              <ion-col>{{ internalControl.comment }}</ion-col>
             </ion-row>
           </ng-container>
         </ion-grid>
