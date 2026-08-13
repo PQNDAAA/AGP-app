@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'internal-controls',
     loadChildren: () => import('./internal-controls/internal-controls.module').then( m => m.InternalControlsPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
+  },
+
 ];
 
 @NgModule({
