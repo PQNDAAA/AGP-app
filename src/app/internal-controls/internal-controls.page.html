@@ -101,13 +101,8 @@
 
               <ion-buttons>
                 <ion-button slot="start" (click)="deleteIC(internalControl)"><ion-icon name="trash-outline"></ion-icon></ion-button>
-                <ion-button slot="end" id="open-modal">e</ion-button>
+                <ion-button slot="end" (click)="openEditingModal(internalControl)">e</ion-button>
               </ion-buttons>
-              <ion-modal trigger="open-modal">
-                <ng-template>
-                  <app-editing-window-ic [internalControl]="internalControl"></app-editing-window-ic>
-                </ng-template>
-              </ion-modal>
             </ion-row>
           </ng-container>
         </ion-grid>
