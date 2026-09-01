@@ -98,6 +98,11 @@
               </div>
 
               <ion-col>{{ internalControl.comment }}</ion-col>
+
+              <ion-buttons>
+                <ion-button slot="start" (click)="deleteIC(internalControl)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                <ion-button slot="end">e</ion-button>
+              </ion-buttons>
             </ion-row>
           </ng-container>
         </ion-grid>

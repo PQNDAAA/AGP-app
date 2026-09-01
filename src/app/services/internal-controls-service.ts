@@ -28,4 +28,10 @@ export class InternalControlsService {
     console.log("Refreshing IC...", this.internalControlsSubject.value);
   }
 
+
+  deleteIC(internalControl: InternalControlEntry){
+    this.internalControls = this.internalControls.filter(ic => ic !== internalControl);
+    this.refreshIC();
+  }
+
 }

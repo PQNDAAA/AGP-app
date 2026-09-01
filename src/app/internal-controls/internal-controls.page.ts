@@ -86,5 +86,9 @@ export class InternalControlsPage implements OnInit {
     return targetValue.touched;
   }
 
+  deleteIC(internalControl: InternalControlEntry){
+    this.icService.deleteIC(internalControl);
+  }
+
 
 }
