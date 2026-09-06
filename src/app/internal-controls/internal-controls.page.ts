@@ -7,6 +7,7 @@ import {NgForm} from "@angular/forms";
 import {InputFocused} from "../input-focused";
 import {ModalController} from "@ionic/angular";
 import {EditingWindowICComponent} from "../editing-window-ic/editing-window-ic.component";
+import {Api} from "../services/api/api";
 
 @Component({
   selector: 'app-internal-controls',
@@ -39,7 +40,8 @@ export class InternalControlsPage implements OnInit {
   ]
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private icService: InternalControlsService, private modalController: ModalController) {
+  constructor(private icService: InternalControlsService, private modalController: ModalController,
+              private apiService: Api) {
     this.internalControls$ = this.icService.internalControls$;
   }
 
@@ -90,6 +92,7 @@ export class InternalControlsPage implements OnInit {
 
   deleteIC(internalControl: InternalControlEntry){
     this.icService.deleteIC(internalControl);
+    this.apiService.getHello();
   }
 
   async openEditingModal(internalControl: InternalControlEntry){
