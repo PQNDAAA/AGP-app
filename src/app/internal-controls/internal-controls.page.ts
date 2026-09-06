@@ -8,6 +8,7 @@ import {InputFocused} from "../input-focused";
 import {ModalController} from "@ionic/angular";
 import {EditingWindowICComponent} from "../editing-window-ic/editing-window-ic.component";
 import {Api} from "../services/api/api";
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-internal-controls',
@@ -39,10 +40,15 @@ export class InternalControlsPage implements OnInit {
 
   ]
 
+  private apiService = inject(Api);
+
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(private icService: InternalControlsService, private modalController: ModalController,
-              private apiService: Api) {
+  constructor(private icService: InternalControlsService, private modalController: ModalController) {
     this.internalControls$ = this.icService.internalControls$;
+    this.apiService.getHello().subscribe(response => {
+      const string = JSON.stringify(response);
+      const parse = JSON.parse(string);
+    });
   }
 
   ngOnInit() {
@@ -90,9 +96,8 @@ export class InternalControlsPage implements OnInit {
     return targetValue.touched;
   }
 
-  deleteIC(internalControl: InternalControlEntry){
+  async deleteIC(internalControl: InternalControlEntry){
     this.icService.deleteIC(internalControl);
-    this.apiService.getHello();
   }
 
   async openEditingModal(internalControl: InternalControlEntry){

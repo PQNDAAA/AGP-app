@@ -13,6 +13,6 @@ export class Api {
   constructor() {}
 
   getHello(){
-    return this.http.get(this.baseUrl);
+    return this.http.get(`${this.baseUrl}`);
   }
 }
