@@ -15,4 +15,8 @@ export class Api {
   getHello(){
     return this.http.get(`${this.baseUrl}`);
   }
+
+  getInternalControls(){
+    return this.http.get(`${this.baseUrl}/app/ic`);
+  }
 }

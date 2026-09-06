@@ -39,7 +39,7 @@
             </div>
             <ion-list *ngFor="let segment of segmentList" class="segmentList">
               <div class="segmentItem">
-                <ion-label>{{ segment.name }}</ion-label>
+                <ion-label>{{ segment.displayName }}</ion-label>
                 <ion-segment value="false" (ionChange)="segmentChange($event, segment.id)">
                   <ion-segment-button value="true">Oui</ion-segment-button>
                   <ion-segment-button value="false">Non</ion-segment-button>
@@ -78,7 +78,7 @@
             <ion-col>Site</ion-col>
 
             <div *ngFor="let segment of segmentList" class="segmentListGrid">
-              <ion-col>{{ segment.name }}</ion-col>
+              <ion-col>{{ segment.displayName }}</ion-col>
             </div>
 
             <ion-col>Observation</ion-col>

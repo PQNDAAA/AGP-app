@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {InternalControlsService} from "./services/internal-controls-service";
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
-export class AppComponent {
-  constructor() {
+export class AppComponent implements OnInit {
 
+  private internalControlsService = inject(InternalControlsService);
+
+  constructor() {
+  }
+
+  async ngOnInit() {
+    await this.initApp();
+  }
+
+  async initApp() {
+    console.log('Initializing App...');
+    await this.internalControlsService.initInternalControls();
   }
 }

@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {InternalControlEntry} from "../interface/internal-control-entry";
+import {Api} from "./api/api";
+import {formSegmentDefaultSettings} from "../interface/form-segment";
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +14,32 @@ export class InternalControlsService {
   private internalControlsSubject = new BehaviorSubject<InternalControlEntry[]>([]);
 
   internalControls$ = this.internalControlsSubject.asObservable();
+
+  private api =  inject(Api);
+
+  async initInternalControls(){
+    console.log("Initial Controls Initialized...");
+    this.api.getInternalControls().subscribe(response => {
+      const data = JSON.stringify(response);
+      const parse = JSON.parse(data);
+
+      const newInternalControls: InternalControlEntry[] = [];
+
+      for(const internalControl of parse){
+        const targetInternalControl : InternalControlEntry = {
+          entryDate: "",
+          entryDateDisplay: "",
+          agentName: internalControl.agentname,
+          domainName: internalControl.domainname,
+          segmentList: formSegmentDefaultSettings,
+          comment: internalControl.comment
+        };
+        newInternalControls.push(targetInternalControl);
+      }
+      this.internalControls = newInternalControls;
+      this.refreshIC();
+    });
+  }
 
 
   addIC(internalControl: InternalControlEntry){

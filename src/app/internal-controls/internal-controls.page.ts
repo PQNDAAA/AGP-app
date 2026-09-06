@@ -45,10 +45,6 @@ export class InternalControlsPage implements OnInit {
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private icService: InternalControlsService, private modalController: ModalController) {
     this.internalControls$ = this.icService.internalControls$;
-    this.apiService.getHello().subscribe(response => {
-      const string = JSON.stringify(response);
-      const parse = JSON.parse(string);
-    });
   }
 
   ngOnInit() {
