@@ -25,6 +25,26 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+:root {
+  /* Palette de couleurs basée sur le logo */
+  --app-color-primary: #0f2f60;
+  --app-color-secondary: #ffffff;
+  --app-color-background: #f4f5f8;
+  --app-color-text: #0f2f60;
+  --app-color-text-on-primary: #ffffff;
+  --app-color-border: #dcdde1;
+
+  /* États au survol */
+  --app-color-primary-hover: #1a4a8c;
+  --app-color-secondary-hover: #f0f0f0;
+}
+
+body {
+  background-color: var(--app-color-background);
+  color: var(--app-color-text);
+  font-family: sans-serif; /* Assure une police par défaut */
+}
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
@@ -53,9 +73,13 @@ ion-card{
   border-radius: 10px;
   max-height: 500px;
   overflow-y: auto;
+  background-color: var(--app-color-secondary);
+  border: 1px solid var(--app-color-border);
+  color: var(--app-color-text);
 }
 
 ion-card-title{
   font-size: 14px;
   font-weight: 600;
+  color: var(--app-color-primary);
 }
