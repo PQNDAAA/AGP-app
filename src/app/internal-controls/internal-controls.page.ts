@@ -8,7 +8,8 @@ import {InputFocused} from "../input-focused";
 import {ModalController} from "@ionic/angular";
 import {EditingWindowICComponent} from "../editing-window-ic/editing-window-ic.component";
 import {Api} from "../services/api/api";
-import { inject } from '@angular/core';
+import {inject} from '@angular/core';
+import {UtilsService} from "../services/utils/utils-service";
 
 @Component({
   selector: 'app-internal-controls',
@@ -40,7 +41,7 @@ export class InternalControlsPage implements OnInit {
 
   ]
 
-  private apiService = inject(Api);
+  private utilsService = inject(UtilsService);
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private icService: InternalControlsService, private modalController: ModalController) {
@@ -52,26 +53,18 @@ export class InternalControlsPage implements OnInit {
 
   async addInternalControl(form: NgForm) {
     if (!form.valid) return;
+    this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entrydate);
 
-    this.internalControlEntry.entryDateDisplay = this.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
-    this.icService.addIC(this.internalControlEntry);
+    await this.icService.addIC(this.internalControlEntry);
   }
 
   segmentChange(e: any, id: number) {
     const value = e.target.value;
-    const targetFormSegment = this.internalControlEntry.segmentList.find(segment => segment.id === id);
+    const targetFormSegment = this.internalControlEntry.booleans.find(segment => segment.id === id);
     if (!targetFormSegment) return;
     targetFormSegment.value = value;
 
-    console.log(this.internalControlEntry.segmentList);
-  }
-
-  get numberOfIC() {
-    return this.icService.icsLength;
-  }
-
-  convertISOtoLocaleDateString(isoString: string) {
-    return new Date(isoString).toLocaleDateString();
+    console.log(this.internalControlEntry.booleans);
   }
 
   inputBlur(e: any) {
@@ -92,11 +85,7 @@ export class InternalControlsPage implements OnInit {
     return targetValue.touched;
   }
 
-  async deleteIC(internalControl: InternalControlEntry){
-    this.icService.deleteIC(internalControl);
-  }
-
-  async openEditingModal(internalControl: InternalControlEntry){
+  async openEditingModal(internalControl: InternalControlEntry) {
     const modal = await this.modalController.create({
       component: EditingWindowICComponent,
       componentProps: {
@@ -104,5 +93,15 @@ export class InternalControlsPage implements OnInit {
       }
     });
     await modal.present();
+  }
+
+
+  // NOM FONCTION A CHANGER
+  deleteIC(internalControl: InternalControlEntry) {
+    this.icService.deleteIC(internalControl);
+  }
+// NOM FONCTION A CHANGER
+  get numberOfIC() {
+    return this.icService.icsLength;
   }
 }

@@ -1,19 +1,19 @@
 import {FormSegment, formSegmentDefaultSettings} from "./form-segment";
 
 export interface InternalControlEntry {
-  entryDate: string;
+  entrydate: string;
   entryDateDisplay: string;
-  agentName: string;
-  domainName: string;
-  segmentList: FormSegment[];
+  agentname: string;
+  domainname: string;
+  booleans: FormSegment[];
   comment:string;
 }
 
 export const InternalControlEntryDefaultSettings: InternalControlEntry = {
-  entryDate: new Date().toISOString(),
+  entrydate: new Date().toISOString(),
   entryDateDisplay: "",
-  agentName: "",
-  domainName: "",
-  segmentList: formSegmentDefaultSettings,
+  agentname: "",
+  domainname: "",
+  booleans: formSegmentDefaultSettings,
   comment: "",
 }

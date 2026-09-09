@@ -22,7 +22,7 @@
   padding: 10px;
   gap: 4px;
 
-  flex: 1 1 150px;
+  flex: 1 1 100px;
 }
 .date-label{
   text-transform: uppercase;
@@ -42,10 +42,10 @@ ion-datetime-button::part(native){
 
 
 
-ion-input{
+#input{
   flex: 1 1 200px;
 }
-ion-textarea{
+#textarea{
   flex: 1 1 100%;
 }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {InternalControlEntry} from "../../interface/internal-control-entry";
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,11 @@ export class Api {
     return this.http.get(`${this.baseUrl}`);
   }
 
-  getInternalControls(){
+   getInternalControls(){
     return this.http.get(`${this.baseUrl}/app/ic`);
+  }
+
+  addInternalControl(internalControl: any){
+    return this.http.post(`${this.baseUrl}/app/internalControl`, internalControl);
   }
 }
