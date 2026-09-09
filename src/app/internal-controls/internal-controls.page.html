@@ -91,7 +91,7 @@
               <ion-col>{{ internalControl.domainname }}</ion-col>
 
               <div *ngFor="let segment of internalControl.booleans" class="segmentListGrid">
-                <ion-col class="segmentValue-col" [style]="segment.value ? 'color: green' : 'color: red'">
+                <ion-col class="segmentValue-col" [class]="segment.value ? 'color-success' : 'color-danger'">
                   <ion-icon name="radio-button-off-outline"></ion-icon>
                   <ion-label>{{ segment.value ? 'Oui' : 'Non' }}</ion-label>
                 </ion-col>

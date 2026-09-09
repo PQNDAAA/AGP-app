@@ -41,7 +41,7 @@ export class InternalControlsService {
           entryDateDisplay: this.utilsService.convertISOtoLocaleDateString(internalControl.entrydate),
           agentname: internalControl.agentname,
           domainname: internalControl.domainname,
-          booleans: formSegmentDefaultSettings,
+          booleans: structuredClone(formSegmentDefaultSettings),
           comment: internalControl.comment
         };
         newInternalControls.push(targetInternalControl);

@@ -4,16 +4,17 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+  background-color: var(--app-color-card-background);
 }
 
 .date-container{
-  background: #171717;
+  background: var(--app-color-secondary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
 
-  border: 1px solid #4b4e55;
+  border: 1px solid var(--app-color-border);
   border-radius: 8px;
 
   min-height: 58px;
@@ -26,7 +27,7 @@
 }
 .date-label{
   text-transform: uppercase;
-  color: #5F6B77;
+  color: var(--app-color-text);
 
   font-size: 12px;
   font-weight: 600;
@@ -50,18 +51,18 @@ ion-datetime-button::part(native){
 }
 
 ion-input, ion-textarea{
-  --background: #171717;
+  --background: var(--app-color-secondary);
   font-size: 12px;
   letter-spacing: 0.3px;
   font-weight: 600;
 
-  --color: white;
-  --placeholder-color: #999;
+  --color: var(--app-color-text);
+  --placeholder-color: var(--app-color-border);
 }
 
 .ion-input-label-text{
   text-transform: uppercase;
-  color: #5F6B77;
+  color: var(--app-color-text);
 }
 
 
@@ -70,6 +71,7 @@ ion-input, ion-textarea{
 
 .segmentList{
   flex: 1 1 150px;
+  background:transparent;
 }
 
 .segmentItem{
@@ -81,21 +83,21 @@ ion-input, ion-textarea{
   gap: 10px;
 
   text-transform: uppercase;
-  color: #5F6B77;
+  color: var(--app-color-text);
   font-size: 12px;
   font-weight: 600;
 }
 
 ion-segment{
-  --background: #171717;
-  border: 1px solid #4b4e55;
+  --background: var(--app-color-secondary);
+  border: 1px solid var(--app-color-border);
   border-radius: 8px;
   padding: 6px;
 }
 
 ion-segment-button{
   --background-hover: transparent;
-  --color-hover: white;
+  --color-hover: var(--app-color-primary-hover);
   --border-radius: 10px;
 
   min-height: 34px;
@@ -121,11 +123,14 @@ ion-segment-button[value="false"]::part(indicator-background){
   background: rgb(255 0 0 / 0.12);
 }
 ion-segment-button[value="true"]{
-  --color-checked: #00ff00;
+  --color-checked: var(--app-color-success);
 }
 ion-segment-button[value="false"]{
-  --color-checked: red;
+  --color-checked: var(--app-color-danger);
 }
+
+.color-success { color: var(--app-color-success); }
+.color-danger { color: var(--app-color-danger); }
 
 ion-button {
   margin-top: 6%;
@@ -144,20 +149,20 @@ ion-grid{
   width: max-content;
   min-width: 100%;
 
-  border: 1px solid #4b4e55;
-  background: #171717;
+  border: 1px solid var(--app-color-border);
+  background: var(--app-color-secondary);
   border-radius: 8px;
 }
 
 .mainElements-row{
-  border-bottom: 1px solid #4b4e55;
+  border-bottom: 1px solid var(--app-color-border);
   padding: 6px 0 9px 0;
   text-transform: uppercase;
 }
 
 .elements-row{
   padding: 6px 0 6px 0;
-  border-bottom: 1px solid #4b4e55;
+  border-bottom: 1px solid var(--app-color-border);
 }
 
 .elements-row:last-child{
@@ -165,7 +170,7 @@ ion-grid{
 }
 
 .agentName-col{
-  color: white;
+  color: #2a569f;
 }
 
 .segmentValue-col{
@@ -183,7 +188,7 @@ ion-row{
 }
 
 ion-col{
-  color: #5F6B77;
+  color: var(--app-color-text);
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.3px;

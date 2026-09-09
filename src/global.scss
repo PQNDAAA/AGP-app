@@ -25,14 +25,31 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+/* Couleurs de base de la charte (Sass) */
+$app-navy: #0f2f60;
+$app-white: #ffffff;
+
+/*
+ * Fond de carte : ton pastel dérivé du bleu marine (8 % de bleu dans du blanc).
+ * Résultat ≈ #ecf0f5 — contraste avec le texte #1e293b ≈ 13:1 et avec le
+ * bleu marine #0f2f60 ≈ 11:1 (WCAG AAA).
+ */
+$app-card-background: mix($app-navy, $app-white, 8%);
+/* Bordure de carte : ton légèrement plus soutenu pour délimiter la carte */
+$app-card-border: mix($app-navy, $app-white, 18%);
+
 :root {
   /* Palette de couleurs basée sur le logo */
-  --app-color-primary: #0f2f60;
-  --app-color-secondary: #ffffff;
-  --app-color-background: #f4f5f8;
-  --app-color-text: #0f2f60;
-  --app-color-text-on-primary: #ffffff;
+  --app-color-primary: #{$app-navy};
+  --app-color-secondary: #{$app-white};
+  --app-color-background: #{$app-white};
+  --app-color-text: #1e293b;
+  --app-color-text-on-primary: #{$app-white};
   --app-color-border: #dcdde1;
+  --app-color-card-background: #{$app-card-background};
+  --app-color-card-border: #{$app-card-border};
+  --app-color-danger: #e53e3e;
+  --app-color-success: #38a169;
 
   /* États au survol */
   --app-color-primary-hover: #1a4a8c;
@@ -73,9 +90,10 @@ ion-card{
   border-radius: 10px;
   max-height: 500px;
   overflow-y: auto;
-  background-color: var(--app-color-secondary);
-  border: 1px solid var(--app-color-border);
-  color: var(--app-color-text);
+  --background: var(--app-color-card-background);
+  --color: var(--app-color-danger);
+  border: 1px solid var(--app-color-card-border);
+  box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
 }
 
 ion-card-title{
