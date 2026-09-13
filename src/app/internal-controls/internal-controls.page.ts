@@ -37,7 +37,10 @@ export class InternalControlsPage implements OnInit {
       name: "comment",
       touched: false,
     },
-
+    {
+      name: "professionalCardNumber",
+      touched: false,
+    }
   ]
 
   private utilsService = inject(UtilsService);
@@ -47,8 +50,7 @@ export class InternalControlsPage implements OnInit {
     this.internalControls$ = this.icService.internalControls$;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async addInternalControl(form: NgForm) {
     if (!form.valid) return;
@@ -58,7 +60,8 @@ export class InternalControlsPage implements OnInit {
   }
 
   segmentChange(e: any, id: number) {
-    const value : boolean = e.target.value;
+    let value = e.target.value;
+    value = JSON.parse(value);
     const targetFormSegment = this.internalControlEntry.booleans.find(segment => segment.id === id);
     if (!targetFormSegment) return;
     targetFormSegment.value = value;
@@ -102,5 +105,9 @@ export class InternalControlsPage implements OnInit {
 // NOM FONCTION A CHANGER
   get numberOfIC() {
     return this.icService.icsLength;
+  }
+
+  getSegment(name: string) : FormSegment | undefined {
+    return this.internalControlEntry.booleans.find(segment => segment.name === name);
   }
 }

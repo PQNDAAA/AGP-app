@@ -91,9 +91,14 @@ ion-card{
   max-height: 500px;
   overflow-y: auto;
   --background: var(--app-color-card-background);
-  --color: var(--app-color-danger);
   border: 1px solid var(--app-color-card-border);
   box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
+}
+
+.warning-container ion-label{
+  text-transform: none;
+  color: var(--app-color-danger);
+
 }
 
 ion-card-title{

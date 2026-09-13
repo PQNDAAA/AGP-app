@@ -62,7 +62,6 @@ ion-input, ion-textarea{
 
 .ion-input-label-text{
   text-transform: uppercase;
-  color: var(--app-color-text);
 }
 
 
@@ -79,9 +78,10 @@ ion-input, ion-textarea{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 10px;
+}
 
+.displayName-segment{
   text-transform: uppercase;
   color: var(--app-color-text);
   font-size: 12px;

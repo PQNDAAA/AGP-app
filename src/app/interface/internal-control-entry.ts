@@ -1,12 +1,14 @@
 import {FormSegment, formSegmentDefaultSettings} from "./form-segment";
 
 export interface InternalControlEntry {
+  id?: number,
   entrydate: string;
   entryDateDisplay: string;
   agentname: string;
   domainname: string;
   booleans: FormSegment[];
   comment:string;
+  professionalcardnumber:string;
 }
 
 export const InternalControlEntryDefaultSettings: InternalControlEntry = {
@@ -16,4 +18,5 @@ export const InternalControlEntryDefaultSettings: InternalControlEntry = {
   domainname: "",
   booleans: structuredClone(formSegmentDefaultSettings),
   comment: "",
+  professionalcardnumber: "",
 }

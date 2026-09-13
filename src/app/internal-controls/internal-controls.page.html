@@ -39,7 +39,15 @@
             </div>
             <ion-list *ngFor="let segment of segmentList" class="segmentList">
               <div class="segmentItem">
-                <ion-label>{{ segment.displayName }}</ion-label>
+                <ion-label class="displayName-segment">{{ segment.displayName }}</ion-label>
+                <div class="warning-container" *ngIf="segment.name === 'professionalcard' && getSegment('professionalcard')?.value === true">
+                <ion-input name="professionalCardNumber" label-placement="floating" label="Numéro de la carte*"
+                           fill="outline" placeholder="CAR-075-2029-12-31-20240123456" (ionBlur)="inputBlur($event)"
+                           [(ngModel)]="internalControlEntry.professionalcardnumber" [required]="true"></ion-input>
+                  <ion-label *ngIf="inputIsTouched('professionalCardNumber') && internalControlEntry.professionalcardnumber.length === 0">Ce champ
+                    est obligatoire.
+                  </ion-label>
+                </div>
                 <ion-segment value="false" (ionChange)="segmentChange($event, segment.id)">
                   <ion-segment-button value="true">Oui</ion-segment-button>
                   <ion-segment-button value="false">Non</ion-segment-button>
@@ -94,6 +102,14 @@
                 <ion-col class="segmentValue-col" [class]="segment.value ? 'color-success' : 'color-danger'">
                   <ion-icon name="radio-button-off-outline"></ion-icon>
                   <ion-label>{{ segment.value ? 'Oui' : 'Non' }}</ion-label>
+                  <ion-icon [id]="'professionalcard'+ internalControl.id + segment.id"
+                            *ngIf="segment.value && segment.name ==='professionalcard'" name="information-circle-outline">
+                  </ion-icon>
+                  <ion-popover [trigger]="'professionalcard'+ internalControl.id + segment.id" trigger-action="click">
+                    <ng-template>
+                      <ion-content>{{ internalControl.professionalcardnumber }}</ion-content>
+                    </ng-template>
+                  </ion-popover>
                 </ion-col>
               </div>
 
@@ -106,7 +122,6 @@
             </ion-row>
           </ng-container>
         </ion-grid>
-
       </ion-card-content>
     </ion-card>
   </div>

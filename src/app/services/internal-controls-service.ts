@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, firstValueFrom, throwError} from "rxjs";
+import {BehaviorSubject, firstValueFrom} from "rxjs";
 import {InternalControlEntry} from "../interface/internal-control-entry";
 import {Api} from "./api/api";
 import {formSegmentDefaultSettings} from "../interface/form-segment";
@@ -39,15 +39,15 @@ export class InternalControlsService {
         const newFormSegment = structuredClone(formSegmentDefaultSettings.map(segment =>
           ({...segment, value: internalControl[segment.name]})));
 
-        console.log(internalControl.id,newFormSegment);
-
         const targetInternalControl: InternalControlEntry = {
+          id: (newInternalControls.length - 1) + 1,
           entrydate: internalControl.entrydate,
           entryDateDisplay: this.utilsService.convertISOtoLocaleDateString(internalControl.entrydate),
           agentname: internalControl.agentname,
           domainname: internalControl.domainname,
           booleans: newFormSegment,
-          comment: internalControl.comment
+          comment: internalControl.comment,
+          professionalcardnumber: "vide",
         };
         console.log(internalControl);
         newInternalControls.push(targetInternalControl);
@@ -60,6 +60,8 @@ export class InternalControlsService {
 
 
   async addIC(internalControl: InternalControlEntry) {
+    internalControl.id = (this.internalControls.length - 1) + 1;
+
     const {entryDateDisplay, ...payload} = internalControl; // VA SUPPRIMER LA VALEUR (entryDateDisplay) D'UN OBJET ET RECREER UNE INSTANCE
 
     const booleansPayload = payload.booleans.map(({id,displayName, ...segment}) => segment); //ON VA EXCLURE (id, displayName) PUIS GARDER TOUT CE QUIL RESTE (...segment) EN VALEUR
@@ -75,7 +77,8 @@ export class InternalControlsService {
         equipmentmaterials: booleans["equipmentmaterials"],
         professionalcard: booleans["professionalcard"],
         ptiisworking: booleans["ptiisworking"],
-        comment: payload.comment
+        comment: payload.comment,
+        professionalcardnumber: payload.professionalcardnumber,
       }));
       console.log(response);
 
