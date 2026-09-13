@@ -14,6 +14,6 @@ export const InternalControlEntryDefaultSettings: InternalControlEntry = {
   entryDateDisplay: "",
   agentname: "",
   domainname: "",
-  booleans: formSegmentDefaultSettings,
+  booleans: structuredClone(formSegmentDefaultSettings),
   comment: "",
 }

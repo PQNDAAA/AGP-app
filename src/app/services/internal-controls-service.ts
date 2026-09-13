@@ -36,14 +36,20 @@ export class InternalControlsService {
       const newInternalControls: InternalControlEntry[] = [];
 
       for (const internalControl of parse) {
+        const newFormSegment = structuredClone(formSegmentDefaultSettings.map(segment =>
+          ({...segment, value: internalControl[segment.name]})));
+
+        console.log(internalControl.id,newFormSegment);
+
         const targetInternalControl: InternalControlEntry = {
           entrydate: internalControl.entrydate,
           entryDateDisplay: this.utilsService.convertISOtoLocaleDateString(internalControl.entrydate),
           agentname: internalControl.agentname,
           domainname: internalControl.domainname,
-          booleans: structuredClone(formSegmentDefaultSettings),
+          booleans: newFormSegment,
           comment: internalControl.comment
         };
+        console.log(internalControl);
         newInternalControls.push(targetInternalControl);
       }
       this.internalControls = newInternalControls;
@@ -64,18 +70,20 @@ export class InternalControlsService {
         entrydate: payload.entrydate,
         agentname: payload.agentname,
         domainname:payload.domainname,
-        requiredworkuniform: booleans["requiredWorkUniform"],
-        workstationuniform: booleans["workStationUniform"],
-        equipmentmaterials: booleans["equipmentMaterials"],
-        professionalcard: booleans["professionalCard"],
-        ptiisworking: booleans["ptiIsWorking"],
+        requiredworkuniform: booleans["requiredworkuniform"],
+        workstationuniform: booleans["workstationuniform"],
+        equipmentmaterials: booleans["equipmentmaterials"],
+        professionalcard: booleans["professionalcard"],
+        ptiisworking: booleans["ptiisworking"],
         comment: payload.comment
       }));
       console.log(response);
+
+      this.internalControls.push(internalControl);
+      this.refreshIC();
     } catch (e) {
       console.error(e);
     }
-    this.refreshIC();
   }
 
   get icsLength() {

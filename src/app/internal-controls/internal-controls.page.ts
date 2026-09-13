@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormSegment, formSegmentDefaultSettings} from "../interface/form-segment";
 import {InternalControlEntry, InternalControlEntryDefaultSettings} from "../interface/internal-control-entry";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {InternalControlsService} from "../services/internal-controls-service";
 import {NgForm} from "@angular/forms";
 import {InputFocused} from "../input-focused";
 import {ModalController} from "@ionic/angular";
 import {EditingWindowICComponent} from "../editing-window-ic/editing-window-ic.component";
-import {Api} from "../services/api/api";
 import {inject} from '@angular/core';
 import {UtilsService} from "../services/utils/utils-service";
 
@@ -59,7 +58,7 @@ export class InternalControlsPage implements OnInit {
   }
 
   segmentChange(e: any, id: number) {
-    const value = e.target.value;
+    const value : boolean = e.target.value;
     const targetFormSegment = this.internalControlEntry.booleans.find(segment => segment.id === id);
     if (!targetFormSegment) return;
     targetFormSegment.value = value;
