@@ -56,7 +56,7 @@ export class InternalControlsPage implements OnInit {
     if (!form.valid) return;
     this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
 
-    await this.icService.addIC(this.internalControlEntry);
+    await this.icService.addInternalControl(this.internalControlEntry);
   }
 
   segmentChange(e: any, id: number) {
@@ -97,11 +97,10 @@ export class InternalControlsPage implements OnInit {
     await modal.present();
   }
 
-
-  // NOM FONCTION A CHANGER
-  deleteIC(internalControl: InternalControlEntry) {
-    this.icService.deleteIC(internalControl);
+  async deleteInternalControl(internalControl: InternalControlEntry) {
+    await this.icService.deleteInternalControl(internalControl);
   }
+
 // NOM FONCTION A CHANGER
   get numberOfIC() {
     return this.icService.icsLength;

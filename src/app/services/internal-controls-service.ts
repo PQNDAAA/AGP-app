@@ -40,7 +40,7 @@ export class InternalControlsService {
           ({...segment, value: internalControl[segment.name]})));
 
         const targetInternalControl: InternalControlEntry = {
-          id: (newInternalControls.length - 1) + 1,
+          id: internalControl.id,
           entryDate: internalControl.entrydate,
           entryDateDisplay: this.utilsService.convertISOtoLocaleDateString(internalControl.entrydate),
           agentName: internalControl.agentname,
@@ -59,9 +59,7 @@ export class InternalControlsService {
   }
 
 
-  async addIC(internalControl: InternalControlEntry) {
-    internalControl.id = (this.internalControls.length - 1) + 1;
-
+  async addInternalControl(internalControl: InternalControlEntry) {
     const {entryDateDisplay, ...payload} = internalControl; // VA SUPPRIMER LA VALEUR (entryDateDisplay) D'UN OBJET ET RECREER UNE INSTANCE
 
     const booleansPayload = payload.booleans.map(({id,displayName, ...segment}) => segment); //ON VA EXCLURE (id, displayName) PUIS GARDER TOUT CE QUIL RESTE (...segment) EN VALEUR
@@ -82,8 +80,33 @@ export class InternalControlsService {
       }));
       console.log(response);
 
-      this.internalControls.push(internalControl);
-      this.refreshIC();
+      if(response){
+        const data = JSON.stringify(response);
+        const parse = JSON.parse(data);
+
+        internalControl.id = parse.id;
+
+        this.internalControls.push(internalControl);
+        this.refreshIC();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async deleteInternalControl(target: InternalControlEntry) {
+    try {
+      if (!target.id) {
+        return;
+      }
+
+      const response = await firstValueFrom(this.api.deleteInternalControl(target.id));
+      console.log(response);
+
+      if(response){
+        this.internalControls = this.internalControls.filter(ic => ic.id !== target.id);
+        this.refreshIC();
+      }
     } catch (e) {
       console.error(e);
     }

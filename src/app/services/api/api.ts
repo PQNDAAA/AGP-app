@@ -24,4 +24,8 @@ export class Api {
   addInternalControl(internalControl: any){
     return this.http.post(`${this.baseUrl}/app/internalControl`, internalControl);
   }
+
+  deleteInternalControl(id : number){
+    return this.http.delete(`${this.baseUrl}/app/internalControl/${id}`);
+  }
 }
