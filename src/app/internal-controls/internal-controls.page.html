@@ -14,26 +14,26 @@
 
             <ion-modal [keepContentsMounted]="true">
               <ng-template>
-                <ion-datetime presentation="date" id="datetime" [(ngModel)]="internalControlEntry.entrydate">
+                <ion-datetime presentation="date" id="datetime" [(ngModel)]="internalControlEntry.entryDate">
                 </ion-datetime>
               </ng-template>
             </ion-modal>
 
             <div class="warning-container" id="input">
               <ion-input label-placement="floating" fill="outline" name="agent-name"
-                         [(ngModel)]="internalControlEntry.agentname" [required]="true" (ionBlur)="inputBlur($event)">
+                         [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)">
                 <div slot="label" class="ion-input-label-text">Nom de l'agent *</div>
               </ion-input>
-              <ion-label *ngIf="inputIsTouched('agent-name') && internalControlEntry.agentname.length === 0">Ce champ
+              <ion-label *ngIf="inputIsTouched('agent-name') && internalControlEntry.agentName.length === 0">Ce champ
                 est obligatoire.
               </ion-label>
             </div>
             <div class="warning-container" id="input">
               <ion-input label-placement="floating" fill="outline" name="domain-name"
-                         [(ngModel)]="internalControlEntry.domainname" [required]="true" (ionBlur)="inputBlur($event)">
+                         [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)">
                 <div slot="label" class="ion-input-label-text">Nom du site *</div>
               </ion-input>
-              <ion-label *ngIf="inputIsTouched('domain-name') && internalControlEntry.domainname.length === 0">Ce champ
+              <ion-label *ngIf="inputIsTouched('domain-name') && internalControlEntry.domainName.length === 0">Ce champ
                 est obligatoire.
               </ion-label>
             </div>
@@ -43,8 +43,8 @@
                 <div class="warning-container" *ngIf="segment.name === 'professionalcard' && getSegment('professionalcard')?.value === true">
                 <ion-input name="professionalCardNumber" label-placement="floating" label="Numéro de la carte*"
                            fill="outline" placeholder="CAR-075-2029-12-31-20240123456" (ionBlur)="inputBlur($event)"
-                           [(ngModel)]="internalControlEntry.professionalcardnumber" [required]="true"></ion-input>
-                  <ion-label *ngIf="inputIsTouched('professionalCardNumber') && internalControlEntry.professionalcardnumber.length === 0">Ce champ
+                           [(ngModel)]="internalControlEntry.professionalCardNumber" [required]="true"></ion-input>
+                  <ion-label *ngIf="inputIsTouched('professionalCardNumber') && internalControlEntry.professionalCardNumber.length === 0">Ce champ
                     est obligatoire.
                   </ion-label>
                 </div>
@@ -95,8 +95,8 @@
           <ng-container *ngFor="let internalControl of internalControls$ | async">
             <ion-row class="elements-row">
               <ion-col>{{ internalControl.entryDateDisplay }}</ion-col>
-              <ion-col class="agentName-col">{{ internalControl.agentname }}</ion-col>
-              <ion-col>{{ internalControl.domainname }}</ion-col>
+              <ion-col class="agentName-col">{{ internalControl.agentName }}</ion-col>
+              <ion-col>{{ internalControl.domainName }}</ion-col>
 
               <div *ngFor="let segment of internalControl.booleans" class="segmentListGrid">
                 <ion-col class="segmentValue-col" [class]="segment.value ? 'color-success' : 'color-danger'">
@@ -105,9 +105,9 @@
                   <ion-icon [id]="'professionalcard'+ internalControl.id + segment.id"
                             *ngIf="segment.value && segment.name ==='professionalcard'" name="information-circle-outline">
                   </ion-icon>
-                  <ion-popover [trigger]="'professionalcard'+ internalControl.id + segment.id" trigger-action="click">
+                  <ion-popover *ngIf="segment.value && segment.name ==='professionalcard'" [trigger]="'professionalcard'+ internalControl.id + segment.id" trigger-action="click">
                     <ng-template>
-                      <ion-content>{{ internalControl.professionalcardnumber }}</ion-content>
+                      <ion-content>{{ internalControl.professionalCardNumber }}</ion-content>
                     </ng-template>
                   </ion-popover>
                 </ion-col>

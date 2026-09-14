@@ -41,13 +41,13 @@ export class InternalControlsService {
 
         const targetInternalControl: InternalControlEntry = {
           id: (newInternalControls.length - 1) + 1,
-          entrydate: internalControl.entrydate,
+          entryDate: internalControl.entrydate,
           entryDateDisplay: this.utilsService.convertISOtoLocaleDateString(internalControl.entrydate),
-          agentname: internalControl.agentname,
-          domainname: internalControl.domainname,
+          agentName: internalControl.agentname,
+          domainName: internalControl.domainname,
           booleans: newFormSegment,
           comment: internalControl.comment,
-          professionalcardnumber: "vide",
+          professionalCardNumber: internalControl.professionalcardnumber,
         };
         console.log(internalControl);
         newInternalControls.push(targetInternalControl);
@@ -69,16 +69,16 @@ export class InternalControlsService {
 
     try{
       const response = await firstValueFrom(this.api.addInternalControl({
-        entrydate: payload.entrydate,
-        agentname: payload.agentname,
-        domainname:payload.domainname,
+        entrydate: payload.entryDate,
+        agentname: payload.agentName,
+        domainname:payload.domainName,
         requiredworkuniform: booleans["requiredworkuniform"],
         workstationuniform: booleans["workstationuniform"],
         equipmentmaterials: booleans["equipmentmaterials"],
         professionalcard: booleans["professionalcard"],
         ptiisworking: booleans["ptiisworking"],
         comment: payload.comment,
-        professionalcardnumber: payload.professionalcardnumber,
+        professionalcardnumber: payload.professionalCardNumber,
       }));
       console.log(response);
 

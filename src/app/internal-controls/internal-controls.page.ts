@@ -54,7 +54,7 @@ export class InternalControlsPage implements OnInit {
 
   async addInternalControl(form: NgForm) {
     if (!form.valid) return;
-    this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entrydate);
+    this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
 
     await this.icService.addIC(this.internalControlEntry);
   }
