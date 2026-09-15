@@ -19,7 +19,8 @@ export class InternalControlsService {
   private api = inject(Api);
   private utilsService = inject(UtilsService);
 
-  constructor() {}
+  constructor() {
+  }
 
   async initInternalControls() {
     console.log("Initial Controls Initialized...");
@@ -62,14 +63,14 @@ export class InternalControlsService {
   async addInternalControl(internalControl: InternalControlEntry) {
     const {entryDateDisplay, ...payload} = internalControl; // VA SUPPRIMER LA VALEUR (entryDateDisplay) D'UN OBJET ET RECREER UNE INSTANCE
 
-    const booleansPayload = payload.booleans.map(({id,displayName, ...segment}) => segment); //ON VA EXCLURE (id, displayName) PUIS GARDER TOUT CE QUIL RESTE (...segment) EN VALEUR
+    const booleansPayload = payload.booleans.map(({id, displayName, ...segment}) => segment); //ON VA EXCLURE (id, displayName) PUIS GARDER TOUT CE QUIL RESTE (...segment) EN VALEUR
     const booleans = Object.fromEntries(booleansPayload.map(({name, value}) => [name, value])); //VOIR DOCUMENTATION POUR FROMENTRIES
 
-    try{
+    try {
       const response = await firstValueFrom(this.api.addInternalControl({
         entrydate: payload.entryDate,
         agentname: payload.agentName,
-        domainname:payload.domainName,
+        domainname: payload.domainName,
         requiredworkuniform: booleans["requiredworkuniform"],
         workstationuniform: booleans["workstationuniform"],
         equipmentmaterials: booleans["equipmentmaterials"],
@@ -80,11 +81,9 @@ export class InternalControlsService {
       }));
       console.log(response);
 
-      if(response){
-        const data = JSON.stringify(response);
-        const parse = JSON.parse(data);
+      if (response.success) {
 
-        internalControl.id = parse.id;
+        internalControl.id = response.data.id;
 
         this.internalControls.push(internalControl);
         this.refreshIC();
@@ -97,13 +96,13 @@ export class InternalControlsService {
   async deleteInternalControl(target: InternalControlEntry) {
     try {
       if (!target.id) {
+        console.log("ID is undefined or null");
         return;
       }
-
       const response = await firstValueFrom(this.api.deleteInternalControl(target.id));
       console.log(response);
 
-      if(response){
+      if (response.success) {
         this.internalControls = this.internalControls.filter(ic => ic.id !== target.id);
         this.refreshIC();
       }
@@ -119,10 +118,5 @@ export class InternalControlsService {
   refreshIC() {
     this.internalControlsSubject.next(this.internalControls);
     console.log("Refreshing IC...", this.internalControlsSubject.value);
-  }
-
-  deleteIC(internalControl: InternalControlEntry) {
-    this.internalControls = this.internalControls.filter(ic => ic !== internalControl);
-    this.refreshIC();
   }
 }
