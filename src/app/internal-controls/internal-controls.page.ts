@@ -69,6 +69,27 @@ export class InternalControlsPage implements OnInit {
     console.log(this.internalControlEntry.booleans);
   }
 
+  onProfessionalCardInput(e: any){
+    let targetValue = e.target.value;
+    if(targetValue.length >= 4){
+      targetValue = targetValue.slice(0, 3) + '-' + targetValue.slice(4);
+    }
+    if(targetValue.length >= 8){
+      targetValue = targetValue.slice(0, 7) + '-' + targetValue.slice(8);
+    }
+    if(targetValue.length >= 13){
+      targetValue = targetValue.slice(0, 12) + '-' + targetValue.slice(13);
+    }
+    if(targetValue.length >= 16){
+      targetValue = targetValue.slice(0, 15) + '-' + targetValue.slice(16);
+    }
+    if(targetValue.length >= 19){
+      targetValue = targetValue.slice(0, 18) + '-' + targetValue.slice(19);
+    }
+    console.log(targetValue);
+    e.target.value = targetValue;
+  }
+
   inputBlur(e: any) {
     const inputName = e.target.name;
     this.changeInputStatus(true, inputName);

@@ -42,8 +42,8 @@
                 <ion-label class="displayName-segment">{{ segment.displayName }}</ion-label>
                 <div class="warning-container" *ngIf="segment.name === 'professionalcard' && getSegment('professionalcard')?.value === true">
                 <ion-input name="professionalCardNumber" label-placement="floating" label="Numéro de la carte*"
-                           fill="outline" placeholder="CAR-075-2029-12-31-20240123456" (ionBlur)="inputBlur($event)"
-                           [(ngModel)]="internalControlEntry.professionalCardNumber" [required]="true"></ion-input>
+                           fill="outline" placeholder="CAR-075-2029-12-31-20240123456" (ionInput)="onProfessionalCardInput($event)"
+                           (ionBlur)="inputBlur($event)" [(ngModel)]="internalControlEntry.professionalCardNumber" [counter]="true" [maxlength]="30" [required]="true"></ion-input>
                   <ion-label *ngIf="inputIsTouched('professionalCardNumber') && internalControlEntry.professionalCardNumber.length === 0">Ce champ
                     est obligatoire.
                   </ion-label>
