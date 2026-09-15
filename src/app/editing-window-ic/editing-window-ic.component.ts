@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IonicModule} from "@ionic/angular";
+import {Component, Input, OnInit,inject} from '@angular/core';
+import {IonicModule, ModalController} from "@ionic/angular";
 import {InternalControlEntry} from "../interface/internal-control-entry";
 
 @Component({
@@ -14,8 +14,14 @@ export class EditingWindowICComponent  implements OnInit {
 
   @Input() internalControl!: InternalControlEntry;
 
+  private modalController = inject(ModalController);
+
   constructor() { }
 
   ngOnInit() {}
+
+  async dismissModal(){
+    await this.modalController.dismiss()
+  }
 
 }
