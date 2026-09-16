@@ -1,0 +1,43 @@
+<ion-grid>
+  <ion-row class="mainElements-row">
+    <ion-col>Date</ion-col>
+    <ion-col>Agent</ion-col>
+    <ion-col>Site</ion-col>
+
+    <div *ngFor="let segment of segmentList" class="segmentListGrid">
+      <ion-col>{{ segment.displayName }}</ion-col>
+    </div>
+
+    <ion-col>Observation</ion-col>
+  </ion-row>
+
+  <ng-container *ngFor="let internalControl of internalControls$ | async">
+    <ion-row class="elements-row">
+      <ion-col>{{ internalControl.entryDateDisplay }}</ion-col>
+      <ion-col class="agentName-col">{{ internalControl.agentName }}</ion-col>
+      <ion-col>{{ internalControl.domainName }}</ion-col>
+
+      <div *ngFor="let segment of internalControl.booleans" class="segmentListGrid">
+        <ion-col class="segmentValue-col" [class]="segment.value ? 'color-success' : 'color-danger'">
+          <ion-icon name="radio-button-off-outline"></ion-icon>
+          <ion-label>{{ segment.value ? 'Oui' : 'Non' }}</ion-label>
+          <ion-icon [id]="'professionalcard'+ internalControl.id + segment.id"
+                    *ngIf="segment.value && segment.name ==='professionalcard'" name="information-circle-outline">
+          </ion-icon>
+          <ion-popover *ngIf="segment.value && segment.name ==='professionalcard'" [trigger]="'professionalcard'+ internalControl.id + segment.id" trigger-action="click">
+            <ng-template>
+              <ion-content>{{ internalControl.professionalCardNumber }}</ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-col>
+      </div>
+
+      <ion-col>{{ internalControl.comment }}</ion-col>
+
+      <ion-buttons>
+        <ion-button slot="start" (click)="deleteInternalControl(internalControl)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        <ion-button slot="end" (click)="openEditingModal(internalControl)"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-row>
+  </ng-container>
+</ion-grid>

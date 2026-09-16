@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EditingWindowICComponent } from './editing-window-ic.component';
+import { InternalControlsViewComponent } from './internal-controls-view.component';
 
-describe('EditingWindowICComponent', () => {
-  let component: EditingWindowICComponent;
-  let fixture: ComponentFixture<EditingWindowICComponent>;
+describe('InternalControlsViewComponent', () => {
+  let component: InternalControlsViewComponent;
+  let fixture: ComponentFixture<InternalControlsViewComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditingWindowICComponent ],
+      declarations: [ InternalControlsViewComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditingWindowICComponent);
+    fixture = TestBed.createComponent(InternalControlsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

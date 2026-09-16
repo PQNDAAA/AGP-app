@@ -37,8 +37,8 @@ export class InternalControlsService {
       const newInternalControls: InternalControlEntry[] = [];
 
       for (const internalControl of parse) {
-        const newFormSegment = structuredClone(formSegmentDefaultSettings.map(segment =>
-          ({...segment, value: internalControl[segment.name]})));
+        const newFormSegment = formSegmentDefaultSettings().map(segment =>
+          ({...segment, value: internalControl[segment.name]}));
 
         const targetInternalControl: InternalControlEntry = {
           id: internalControl.id,
@@ -119,4 +119,6 @@ export class InternalControlsService {
     this.internalControlsSubject.next(this.internalControls);
     console.log("Refreshing IC...", this.internalControlsSubject.value);
   }
+
+
 }

@@ -11,12 +11,14 @@ export interface InternalControlEntry {
   professionalCardNumber:string;
 }
 
-export const InternalControlEntryDefaultSettings: InternalControlEntry = {
-  entryDate: new Date().toISOString(),
-  entryDateDisplay: "",
-  agentName: "",
-  domainName: "",
-  booleans: structuredClone(formSegmentDefaultSettings),
-  comment: "",
-  professionalCardNumber: "",
+export function internalControlEntryDefaultSettings(): InternalControlEntry {
+  return {
+    entryDate: new Date().toISOString(),
+    entryDateDisplay: "",
+    agentName: "",
+    domainName: "",
+    booleans: formSegmentDefaultSettings(),
+    comment: "",
+    professionalCardNumber: "",
+  };
 }

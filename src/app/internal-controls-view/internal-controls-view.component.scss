@@ -1,0 +1,57 @@
+.color-success { color: var(--app-color-success); }
+.color-danger { color: var(--app-color-danger); }
+
+ion-grid{
+  width: max-content;
+  min-width: 100%;
+
+  border: 1px solid var(--app-color-border);
+  background: var(--app-color-secondary);
+  border-radius: 8px;
+}
+
+.mainElements-row{
+  border-bottom: 1px solid var(--app-color-border);
+  padding: 6px 0 9px 0;
+  text-transform: uppercase;
+}
+
+.elements-row{
+  padding: 6px 0 6px 0;
+  border-bottom: 1px solid var(--app-color-border);
+}
+
+.elements-row:last-child{
+  border-bottom: none;
+}
+
+.agentName-col{
+  color: #2a569f;
+}
+
+.segmentValue-col{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  //justify-content: center;
+}
+
+ion-row{
+  flex-wrap: nowrap;
+  min-width: 100%;
+  align-items: center;
+}
+
+ion-col{
+  color: var(--app-color-text);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  flex: 0 0 auto;
+  width: 150px;
+}
+
+.segmentListGrid{
+  display: flex;
+}
