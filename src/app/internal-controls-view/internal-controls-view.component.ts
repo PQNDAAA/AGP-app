@@ -1,5 +1,5 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import {IonicModule, ModalController} from "@ionic/angular";
+import {AlertController, IonicModule, ModalController} from "@ionic/angular";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {FormSegment, formSegmentDefaultSettings} from "../interface/form-segment";
 import {InternalControlEntry} from "../interface/internal-control-entry";
@@ -27,6 +27,7 @@ export class InternalControlsViewComponent  implements OnInit {
 
   private modalController = inject(ModalController);
   private icService = inject(InternalControlsService);
+  private alertController = inject(AlertController);
 
   constructor() {
     this.internalControls$ = this.icService.internalControls$;
@@ -38,10 +39,31 @@ export class InternalControlsViewComponent  implements OnInit {
     const modal = await this.modalController.create({
       component: FormulaireModalComponent,
       componentProps: {
-        internalControlEntry: internalControl
+        internalControlEntry: internalControl,
+        isEdit: true,
       }
     });
     await modal.present();
+  }
+
+  async openDeleteModal(targetInternalControl: InternalControlEntry){
+    const alert = await this.alertController.create({
+      header: 'Supprimer le contrôle interne',
+      message: 'Êtes-vous sûr de vouloir supprimer ce contrôle interne ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+        },
+        {
+          text: 'Supprimer',
+          role: 'delete',
+          handler: async () =>
+            await this.deleteInternalControl(targetInternalControl),
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async deleteInternalControl(internalControl: InternalControlEntry) {

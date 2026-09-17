@@ -15,12 +15,8 @@ export class Api {
 
   constructor() {}
 
-  getHello(){
-    return this.http.get(`${this.baseUrl}`);
-  }
-
-   getInternalControls(){
-    return this.http.get(`${this.baseUrl}/app/ic`);
+   getInternalControls(): Observable<Response>{
+    return this.http.get<Response>(`${this.baseUrl}/app/ic`);
   }
 
   addInternalControl(internalControl: any): Observable<Response>{
@@ -29,5 +25,9 @@ export class Api {
 
   deleteInternalControl(id : number): Observable<Response>{
     return this.http.delete<Response>(`${this.baseUrl}/app/internalControl/${id}`);
+  }
+
+  updateInternalControl(id : number, internalControl: any): Observable<Response>{
+    return this.http.put<Response>(`${this.baseUrl}/app/internalControl/${id}`, internalControl);
   }
 }

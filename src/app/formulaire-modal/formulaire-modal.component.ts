@@ -16,6 +16,7 @@ import {InternalControlsAddComponent} from "../internal-controls-add/internal-co
 export class FormulaireModalComponent implements OnInit{
 
   @Input() internalControlEntry!: InternalControlEntry;
+  @Input() isEdit!: boolean;
 
   localInternalControlEntry!: InternalControlEntry;
 
@@ -25,11 +26,10 @@ export class FormulaireModalComponent implements OnInit{
 
   ngOnInit() {
     this.localInternalControlEntry = structuredClone(this.internalControlEntry);
+    console.log(this.localInternalControlEntry);
   }
-
 
   async dismissModal() {
     await this.modalController.dismiss();
   }
-
 }

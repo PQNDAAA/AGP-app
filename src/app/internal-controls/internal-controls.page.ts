@@ -4,6 +4,8 @@ import {
   internalControlEntryDefaultSettings,
 } from "../interface/internal-control-entry";
 import {InternalControlsService} from "../services/internal-controls-service";
+import {ModalController} from "@ionic/angular";
+import {FormulaireModalComponent} from "../formulaire-modal/formulaire-modal.component";
 
 @Component({
   selector: 'app-internal-controls',
@@ -16,8 +18,20 @@ export class InternalControlsPage {
   internalControlEntry: InternalControlEntry = internalControlEntryDefaultSettings();
 
   private icService = inject(InternalControlsService);
+  private modalController = inject(ModalController);
 
   constructor() {
+  }
+
+  async addModal(){
+    const modal = await this.modalController.create({
+      component: FormulaireModalComponent,
+      componentProps: {
+        internalControlEntry: this.internalControlEntry,
+        isEdit: false
+      }
+    });
+    await modal.present();
   }
 
 // NOM FONCTION A CHANGER

@@ -35,7 +35,7 @@
       <ion-col>{{ internalControl.comment }}</ion-col>
 
       <ion-buttons>
-        <ion-button slot="start" (click)="deleteInternalControl(internalControl)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+        <ion-button (click)="openDeleteModal(internalControl)" slot="start"><ion-icon name="trash-outline"></ion-icon></ion-button>
         <ion-button slot="end" (click)="openEditingModal(internalControl)"><ion-icon name="create-outline"></ion-icon></ion-button>
       </ion-buttons>
     </ion-row>

@@ -1,5 +1,11 @@
 .control-history-card{
-  max-height: 300px;
+  max-height: 70%;
   overflow-x: auto;
+}
+ion-fab-button::part(native){
+  background-color: var(--app-color-primary);
+}
+ion-fab-button::part(native):hover{
+  background-color: var(--app-color-primary-hover);
 }
 

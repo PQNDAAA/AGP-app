@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {
   InternalControlEntry,
   internalControlEntryDefaultSettings,
@@ -8,7 +8,7 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {InputFocused, inputFocusedDefaultSettings} from "../input-focused";
 import {UtilsService} from "../services/utils/utils-service";
 import {InternalControlsService} from "../services/internal-controls-service";
-import {IonicModule} from "@ionic/angular";
+import {IonDatetime, IonicModule, ModalController} from "@ionic/angular";
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
@@ -25,33 +25,48 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class InternalControlsAddComponent {
 
+  @Input() isEdit!: boolean;
   @Input() internalControlEntry!: InternalControlEntry;
 
   inputsFocused: InputFocused[] = inputFocusedDefaultSettings();
   private utilsService = inject(UtilsService);
   private icService = inject(InternalControlsService);
+  private modalController = inject(ModalController);
 
   constructor() {
   }
 
-  async addInternalControl(form: NgForm) {
+  async saveInternalControl(form: NgForm) {
     if (!form.valid) return;
     this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
 
-    await this.icService.addInternalControl(this.internalControlEntry);
-    this.resetForm();
+    if(this.isEdit) {
+      await this.icService.modifyInternalControl(this.internalControlEntry);
+      this.isEdit = false;
+    } else {
+      await this.icService.addInternalControl(this.internalControlEntry);
+    }
+    await this.closeModal();
+  }
+
+  dateChange(e: any) {
+    this.internalControlEntry.entryDate = e.detail.value;
   }
 
   segmentChange(e: any, id: number) {
     let value = e.target.value;
     value = JSON.parse(value);
+
     const targetFormSegment = this.internalControlEntry.booleans.find(segment => segment.id === id);
     if (!targetFormSegment) return;
+
     targetFormSegment.value = value;
 
     console.log(this.internalControlEntry.booleans);
   }
 
+
+  //BUG A CORRIGER
   onProfessionalCardInput(e: any) {
     let targetValue = e.target.value;
     if (targetValue.length >= 4) {
@@ -91,13 +106,16 @@ export class InternalControlsAddComponent {
     return targetValue.touched;
   }
 
+  professionalCardNumberLengthIsCorrect(): boolean {
+    return this.internalControlEntry.professionalCardNumber ? this.internalControlEntry.professionalCardNumber.length === 30 : true;
+  }
+
   getSegment(name: string): FormSegment | undefined {
     return this.internalControlEntry.booleans.find(segment => segment.name === name);
   }
 
-  resetForm(){
-    this.internalControlEntry = internalControlEntryDefaultSettings();
-    this.inputsFocused = inputFocusedDefaultSettings();
+  async closeModal() {
+    await this.modalController.dismiss();
   }
 
   protected readonly JSON = JSON;

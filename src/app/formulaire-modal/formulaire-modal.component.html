@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-title>{{isEdit ? "Modification d'une entrée" : "Création d'une entrée"}}</ion-title>
     <ion-button slot="end" (click)="dismissModal()"><ion-icon name="close"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-internal-controls-add [internalControlEntry]="localInternalControlEntry"></app-internal-controls-add>
+  <app-internal-controls-add [internalControlEntry]="localInternalControlEntry" [isEdit]="isEdit"></app-internal-controls-add>
 </ion-content>

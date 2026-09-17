@@ -1,13 +1,5 @@
 <ion-content [fullscreen]="true">
   <div class="center-wrapper">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Ajouter un contrôle</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <app-internal-controls-add [internalControlEntry]="internalControlEntry"></app-internal-controls-add>
-      </ion-card-content>
-    </ion-card>
     <ion-card class="control-history-card">
       <ion-card-header>
         <ion-card-title>Historique des contrôles</ion-card-title>
@@ -18,4 +10,9 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
