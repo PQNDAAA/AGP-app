@@ -33,7 +33,7 @@ export class InternalControlsAddComponent {
   private icService = inject(InternalControlsService);
   private modalController = inject(ModalController);
 
-  private readonly professionalCardGroupSizes = [3,6,10,12,14];
+  private readonly professionalCardGroupSizes = [3, 6, 10, 12, 14];
 
   constructor() {
   }
@@ -42,7 +42,7 @@ export class InternalControlsAddComponent {
     if (!form.valid) return;
     this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
 
-    if(this.isEdit) {
+    if (this.isEdit) {
       await this.icService.modifyInternalControl(this.internalControlEntry);
       this.isEdit = false;
     } else {
@@ -69,33 +69,27 @@ export class InternalControlsAddComponent {
 
 
   onProfessionalCardInput(e: any) {
-    let rawValue = (e.target.value ?? '').replace(/-/g, '');
+    const rawValue = (e.target.value ?? '').replace(/-/g, '');
     let formattedValue = '';
 
     let startIndex = 0;
     let index = 0;
 
-    console.log("Valeur initiale:", rawValue);
+    console.log("VALEUR INITIALE: " + rawValue);
 
-    for(const size of this.professionalCardGroupSizes){
-      if(!(rawValue.length > 3)) formattedValue += rawValue.slice(startIndex, rawValue.length);
-
-      if(size >= rawValue.length){
-        console.log("break");
+    for (const size of this.professionalCardGroupSizes) {
+      if (size >= rawValue.length){
+        if (rawValue.length <= this.professionalCardGroupSizes[0]) formattedValue += rawValue.slice(startIndex);
         break;
       }
-
       formattedValue += rawValue.slice(startIndex, size) + '-';
+      startIndex = size;
       index++;
 
-      if(!(rawValue.length > this.professionalCardGroupSizes[index])){
-        formattedValue += rawValue.slice(size,rawValue.length);
-      }
-      startIndex = size;
-      console.log("Valeur formatée: ", formattedValue);
+      if (rawValue.length <= this.professionalCardGroupSizes[index] || index >= this.professionalCardGroupSizes.length) formattedValue += rawValue.slice(startIndex);
     }
+    console.log("Valeur formatée: ", formattedValue);
     e.target.value = formattedValue;
-    console.log("Valeur dans l'array:",this.internalControlEntry.professionalCardNumber);
   }
 
 
