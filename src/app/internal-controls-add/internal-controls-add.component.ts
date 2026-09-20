@@ -33,6 +33,8 @@ export class InternalControlsAddComponent {
   private icService = inject(InternalControlsService);
   private modalController = inject(ModalController);
 
+  private readonly professionalCardGroupSizes = [3,6,10,12,14];
+
   constructor() {
   }
 
@@ -66,27 +68,36 @@ export class InternalControlsAddComponent {
   }
 
 
-  //BUG A CORRIGER
   onProfessionalCardInput(e: any) {
-    let targetValue = e.target.value;
-    if (targetValue.length >= 4) {
-      targetValue = targetValue.slice(0, 3) + '-' + targetValue.slice(4);
+    let rawValue = (e.target.value ?? '').replace(/-/g, '');
+    let formattedValue = '';
+
+    let startIndex = 0;
+    let index = 0;
+
+    console.log("Valeur initiale:", rawValue);
+
+    for(const size of this.professionalCardGroupSizes){
+      if(!(rawValue.length > 3)) formattedValue += rawValue.slice(startIndex, rawValue.length);
+
+      if(size >= rawValue.length){
+        console.log("break");
+        break;
+      }
+
+      formattedValue += rawValue.slice(startIndex, size) + '-';
+      index++;
+
+      if(!(rawValue.length > this.professionalCardGroupSizes[index])){
+        formattedValue += rawValue.slice(size,rawValue.length);
+      }
+      startIndex = size;
+      console.log("Valeur formatée: ", formattedValue);
     }
-    if (targetValue.length >= 8) {
-      targetValue = targetValue.slice(0, 7) + '-' + targetValue.slice(8);
-    }
-    if (targetValue.length >= 13) {
-      targetValue = targetValue.slice(0, 12) + '-' + targetValue.slice(13);
-    }
-    if (targetValue.length >= 16) {
-      targetValue = targetValue.slice(0, 15) + '-' + targetValue.slice(16);
-    }
-    if (targetValue.length >= 19) {
-      targetValue = targetValue.slice(0, 18) + '-' + targetValue.slice(19);
-    }
-    console.log(targetValue);
-    e.target.value = targetValue;
+    e.target.value = formattedValue;
+    console.log("Valeur dans l'array:",this.internalControlEntry.professionalCardNumber);
   }
+
 
   inputBlur(e: any) {
     const inputName = e.target.name;
