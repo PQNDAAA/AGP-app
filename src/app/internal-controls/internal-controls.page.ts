@@ -6,6 +6,7 @@ import {
 import {InternalControlsService} from "../services/internal-controls-service";
 import {ModalController} from "@ionic/angular";
 import {FormulaireModalComponent} from "../formulaire-modal/formulaire-modal.component";
+import {PdfExport} from "../services/pdf-export/pdf-export";
 
 @Component({
   selector: 'app-internal-controls',
@@ -19,6 +20,7 @@ export class InternalControlsPage {
 
   private icService = inject(InternalControlsService);
   private modalController = inject(ModalController);
+  private pdfExportService = inject(PdfExport);
 
   constructor() {
   }
@@ -32,6 +34,10 @@ export class InternalControlsPage {
       }
     });
     await modal.present();
+  }
+
+  async exportDocument(){
+    await this.pdfExportService.exportDocument();
   }
 
 // NOM FONCTION A CHANGER
