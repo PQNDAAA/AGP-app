@@ -4,8 +4,10 @@
 }
 ion-fab-button::part(native){
   background-color: var(--app-color-primary);
+  color: var(--app-color-text-on-primary);
 }
 ion-fab-button::part(native):hover{
   background-color: var(--app-color-primary-hover);
 }
+
 
