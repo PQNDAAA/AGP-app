@@ -22,7 +22,7 @@ export function formSegmentDefaultSettings(): FormSegment[] {
     {
       id: 3,
       name: 'equipmentmaterials',
-      displayName: 'équipements et matériels',
+      displayName: 'Équipements et Matériels',
       value: false,
     },
     {

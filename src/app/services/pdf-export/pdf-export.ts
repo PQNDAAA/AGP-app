@@ -120,19 +120,35 @@ export class PdfExport {
         },
         {text: '', pageBreak: 'after'},
         {
-          style: 'internalControlsTable',
+          style:'internalControlsTable',
           table: {
             widths: ['auto','auto','auto',...Array(this.formSegment.length).fill('auto'), 'auto'],
             body: [
-              ['Date', 'Agent', 'Site',...this.formSegment.map((segment) => [segment.displayName]), 'Observation'],
-              ...this.internalControlsService.internalControls.map((ic) => [ic.entryDateDisplay,
-                ic.agentName,
-                ic.domainName,
-                ...this.formSegment.map((segment) => segment.value),
-                ic.comment]),
+              [
+                {text: 'Date', style: 'internalControlsTableHeader'},
+                {text: 'Agent', style: 'internalControlsTableHeader'},
+                {text: 'Site', style: 'internalControlsTableHeader'},
+                ...this.formSegment.map((segment) =>
+                    ({text: segment.displayName, style: 'internalControlsTableHeader'})),
+                {text: 'Observation', style: 'internalControlsTableHeader'},
+              ],
+              ...this.internalControlsService.internalControls.map((ic) => {
+                return [
+                  {text: ic.entryDateDisplay, style: 'internalControlsTableData', alignment: 'center'},
+                  {text: ic.agentName, style: 'internalControlsTableData'},
+                  {text: ic.domainName, style: 'internalControlsTableData'},
+                  ...ic.booleans.map((segment) =>
+                    ({text :segment.value ? 'Oui' : 'Non',style:'internalControlsTableData', alignment: 'center', color: segment.value ? 'green' : 'red'})),
+                  {text: ic.comment, style: 'internalControlsTableData', lineHeight: 1.2}
+                ]}),
             ],
           },
-          layout: 'lightHorizontalLines'
+          layout: {
+            vLineWidth: () => 0.25,
+            hLineWidth: () => 0.25,
+            hLineColor: () => '#bcc2cd',
+            vLineColor: () => '#bcc2cd',
+          }
         },
         {
           columns: [
@@ -152,7 +168,9 @@ export class PdfExport {
       styles: {
         header: {fontSize: 22, bold: true, margin: [0, 0, 0, 10], alignment: 'center'},
         subheader: {alignment: 'center'},
-        internalControlsTable: {margin: [0, 5, 0, 15], fontSize: 10, bold: true},
+        internalControlsTableData: {margin: [0, 3, 0, 3], fontSize: 9, color: '#2b3a4a', fillColor:'#eef3f8'},
+        internalControlsTableHeader: {margin: [0, 4, 0, 4], fontSize: 10, bold: true, alignment: 'center', characterSpacing: 1, fillColor: '#0f2f60', color: '#ffffff'},
+        internalControlsTable: {marginBottom: 15}
       }
     }, 'rapport-controles.pdf');
   }
