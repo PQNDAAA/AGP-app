@@ -1,13 +1,14 @@
 <ion-content [fullscreen]="true">
   <div class="center-wrapper">
+    <header class="page-heading">
+      <div class="page-heading-title">
+        <ion-label class="heading-subtitle">Registre des contrôles internes</ion-label>
+        <ion-label class="heading-title">Historique des contrôles</ion-label>
+      </div>
+      <ion-badge>{{numberOfIC}} entrées</ion-badge>
+    </header>
     <ion-card class="control-history-card">
-      <ion-card-header>
-        <ion-card-title>Historique des contrôles</ion-card-title>
-        <ion-card-subtitle>{{ numberOfIC }} entrées</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <app-internal-controls-view></app-internal-controls-view>
-      </ion-card-content>
+      <app-internal-controls-view></app-internal-controls-view>
     </ion-card>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -15,14 +16,11 @@
       <ion-icon name="chevron-up"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button (click)="addModal()">
+      <ion-fab-button (click)="addModal()" title="Ajouter un contrôle interne">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="exportDocument()">
+      <ion-fab-button (click)="exportDocument()" title="Exporter l'historique en PDF">
         <ion-icon name="document-text-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="print-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

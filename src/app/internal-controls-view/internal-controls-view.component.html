@@ -19,7 +19,7 @@
 
       <div *ngFor="let segment of internalControl.booleans" class="segmentListGrid">
         <ion-col class="segmentValue-col" [class]="segment.value ? 'color-success' : 'color-danger'">
-          <ion-icon name="radio-button-off-outline"></ion-icon>
+          <ion-icon [name]="segment.value ? 'checkmark-circle' : 'close-circle'"></ion-icon>
           <ion-label>{{ segment.value ? 'Oui' : 'Non' }}</ion-label>
           <ion-icon [id]="'professionalcard'+ internalControl.id + segment.id"
                     *ngIf="segment.value && segment.name ==='professionalcard'" name="information-circle-outline">
@@ -35,8 +35,8 @@
       <ion-col>{{ internalControl.comment }}</ion-col>
 
       <ion-buttons>
-        <ion-button (click)="openDeleteModal(internalControl)" slot="start"><ion-icon name="trash-outline"></ion-icon></ion-button>
-        <ion-button slot="end" (click)="openEditingModal(internalControl)"><ion-icon name="create-outline"></ion-icon></ion-button>
+        <ion-button fill="clear" size="small" (click)="openDeleteModal(internalControl)" slot="start"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
+        <ion-button fill="clear" size="small" slot="end" (click)="openEditingModal(internalControl)"><ion-icon name="create-outline"></ion-icon></ion-button>
       </ion-buttons>
     </ion-row>
   </ng-container>

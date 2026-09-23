@@ -1,7 +1,35 @@
-.control-history-card{
-  max-height: 70%;
-  overflow-x: auto;
+.page-heading-title{
+  display: flex;
+  flex-direction: column;
+
+  .heading-title{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--app-color-primary);
+  }
+
+  .heading-subtitle{
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--app-color-text);
+  }
 }
+
+.page-heading{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+ion-badge{
+  --background: var(--app-color-card-background);
+  --color: var(--app-color-text);
+  border: 1px solid var(--app-color-card-border);
+  font-weight: 500;
+  padding: 4px 10px;
+}
+
 ion-fab-button::part(native){
   background-color: var(--app-color-primary);
   color: var(--app-color-text-on-primary);

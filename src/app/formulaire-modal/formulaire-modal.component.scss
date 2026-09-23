@@ -1,3 +1,9 @@
 ion-content{
   --background: var(--app-color-card-background);
 }
+
+ion-title{
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--app-color-primary);
+}

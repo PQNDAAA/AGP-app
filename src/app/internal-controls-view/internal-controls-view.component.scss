@@ -1,7 +1,12 @@
-.color-success { color: var(--app-color-success); }
-.color-danger { color: var(--app-color-danger); }
+.color-success {
+  color: var(--app-color-success);
+}
 
-ion-grid{
+.color-danger {
+  color: var(--app-color-danger);
+}
+
+ion-grid {
   width: max-content;
   min-width: 100%;
 
@@ -10,48 +15,69 @@ ion-grid{
   border-radius: 8px;
 }
 
-.mainElements-row{
+//EN-TETE
+.mainElements-row {
+  background: var(--app-color-card-background);
   border-bottom: 1px solid var(--app-color-border);
+  color: var(--app-color-primary);
   padding: 6px 0 9px 0;
+
   text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+
+  position: sticky;
+  top: 0;
 }
 
-.elements-row{
+//ELEMENTS
+.elements-row {
   padding: 6px 0 6px 0;
   border-bottom: 1px solid var(--app-color-border);
+
+  font-weight: 400;
+  font-size: 11px;
 }
 
-.elements-row:last-child{
+.elements-row:hover {
+  background: rgb(15 47 96 / 0.07)
+}
+
+.elements-row:last-child {
   border-bottom: none;
 }
 
-.agentName-col{
-  color: #2a569f;
+//COLONNE AGENT
+
+.agentName-col {
+  color: var(--app-color-primary);
+  font-weight: 600;
 }
 
-.segmentValue-col{
+//COLONNE SEGMENT VALUE
+
+.segmentValue-col {
   display: flex;
   align-items: center;
   gap: 4px;
-
-  //justify-content: center;
 }
 
-ion-row{
+//LIGNES
+
+ion-row {
   flex-wrap: nowrap;
   min-width: 100%;
   align-items: center;
 }
 
-ion-col{
-  color: var(--app-color-text);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.3px;
+//COLONNES
+
+ion-col {
   flex: 0 0 auto;
   width: 150px;
 }
 
-.segmentListGrid{
+.segmentListGrid {
   display: flex;
 }
