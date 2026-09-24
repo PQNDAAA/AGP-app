@@ -17,19 +17,27 @@
   justify-content: center;
   align-items: start;
   border: 1px solid var(--app-color-border);
-  border-radius: 8px;
-  min-height: 58px;
-  padding: 10px;
-  gap: 4px;
+  border-radius: 4px;
+  min-height: 56px;
+  padding: 8px 16px;
+  gap: 2px;
 
   flex: 1 1 100px;
+
+  .text-label{
+    font-size: 11px;
+    color: var(--app-color-primary);
+    opacity: 0.7;
+    text-transform: none;
+  }
 }
 
 ion-datetime-button::part(native) {
   background: transparent;
   padding: 0;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--app-color-text);
 }
 
 #input {
@@ -41,10 +49,13 @@ ion-datetime-button::part(native) {
 }
 
 ion-input, ion-textarea {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--app-color-text);
   --background: var(--app-color-secondary);
-  --placeholder-color: var(--app-color-border);
+  --highlight-color-focused: var(--app-color-primary);
+  --highlight-color-invalid: var(--app-color-danger);
+  --placeholder-color: #94a3b8;
+  --border-color: var(--app-color-border);
 }
 
 //SEGMENT PART
@@ -57,23 +68,24 @@ ion-input, ion-textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
+
+  .text-label{
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--app-color-primary);
+  }
 }
 ion-segment {
   --background: var(--app-color-secondary);
-  border: 1px solid var(--app-color-border);
   border-radius: 8px;
   padding: 6px;
 }
 ion-segment-button {
-  --background-hover: transparent;
-  --color-hover: var(--app-color-primary-hover);
-
-  min-height: 34px;
-
+  min-height: 30px;
   font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.3px;
+  font-size: 12px;
+  --indicator-box-shadow: 0 1px 2px rgba(15, 47, 96, 0.15);
 }
 //L'indicateur sur le segment
 ion-segment-button::part(indicator) {
@@ -82,45 +94,25 @@ ion-segment-button::part(indicator) {
 //Le background de l'indicateur il gere (background;border etc)
 ion-segment-button::part(indicator-background) {
   height: 100%;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 //SEGMENT BUTTON VALUE
-ion-segment-button[value="true"]::part(indicator-background) {
-  background: rgb(0 255 0 / 0.12);
-}
-ion-segment-button[value="false"]::part(indicator-background) {
-  background: rgb(255 0 0 / 0.12);
-}
-ion-segment-button[value="true"] {
-  --color-checked: var(--app-color-success);
-}
-ion-segment-button[value="false"] {
-  --color-checked: var(--app-color-danger);
-}
+ion-segment-button[value="true"]  { --color-checked: var(--app-color-success); }
+ion-segment-button[value="false"] { --color-checked: var(--app-color-danger); }
+ion-segment-button[value="true"]::part(indicator-background)  { background: rgba(56, 161, 105, 0.14); }
+ion-segment-button[value="false"]::part(indicator-background) { background: rgba(229, 62, 62, 0.14); }
 
 
 // BOUTON SUBMIT
 .submit-button {
-  font-size: 15px;
-  font-weight: 500;
-  height: 48px;
+  font-weight: 600;
+  height: 44px;
 
   margin: 1%;
 
   --background: var(--app-color-primary);
   --background-color: var(--app-color-primary-hover);
-  --border-radius: 10px;
+  --border-radius: 8px;
 }
-.submit-button[disabled] {
-  --opacity: 0.45;
-}
-
-//TITLE STYLE
-.text-label {
-  text-transform: uppercase;
-  color: var(--app-color-primary);
-  font-size: 12px;
-  letter-spacing: 0.3px;
-  font-weight: 600;
-}
+.submit-button[disabled] {--opacity: 0.45;}

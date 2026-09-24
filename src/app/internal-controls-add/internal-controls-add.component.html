@@ -5,49 +5,19 @@
       <ion-datetime-button datetime="datetime"></ion-datetime-button>
     </div>
 
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime presentation="date" id="datetime" (ionChange)="dateChange($event)" [showDefaultButtons]="true"
-                      [value]="internalControlEntry.entryDate">
-        </ion-datetime>
-      </ng-template>
-    </ion-modal>
+    <ion-input label-placement="floating" label="Nom de l'agent *" fill="outline" name="agent-name"
+               [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)"
+               errorText="Ce champ est obligatoire.">
+    </ion-input>
 
-    <div class="warning-container" id="input">
-      <ion-input label-placement="floating" fill="outline" name="agent-name"
-                 [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)">
-        <div slot="label" class="text-label">Nom de l'agent *</div>
-      </ion-input>
-      <ion-label *ngIf="inputIsTouched('agent-name') && internalControlEntry.agentName.length === 0">Ce champ
-        est obligatoire.
-      </ion-label>
-    </div>
-
-    <div class="warning-container" id="input">
-      <ion-input label-placement="floating" fill="outline" name="domain-name"
-                 [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)">
-        <div slot="label" class="text-label">Nom du site *</div>
-      </ion-input>
-      <ion-label *ngIf="inputIsTouched('domain-name') && internalControlEntry.domainName.length === 0">Ce champ
-        est obligatoire.
-      </ion-label>
-    </div>
+    <ion-input label-placement="floating" label="Nom du site *" fill="outline" name="domain-name"
+               [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)"
+               errorText="Ce champ est obligatoire.">
+    </ion-input>
 
     <ion-list *ngFor="let segment of internalControlEntry.booleans" class="segmentList">
       <div class="segmentItem">
         <ion-label class="text-label">{{ segment.displayName }}</ion-label>
-        <div class="warning-container"
-             *ngIf="segment.name === 'professionalcard' && getSegment('professionalcard')?.value === true">
-          <ion-input name="professionalCardNumber" label-placement="floating" label="Numéro de la carte*"
-                     fill="outline" placeholder="CAR-075-2029-12-31-20240123456"
-                     (ionInput)="onProfessionalCardInput($event)"
-                     (ionBlur)="inputBlur($event)" [(ngModel)]="internalControlEntry.professionalCardNumber"
-                     [counter]="true" [maxlength]="30" [required]="true"></ion-input>
-          <ion-label *ngIf="inputIsTouched('professionalCardNumber') && !professionalCardNumberLengthIsCorrect()">Ce
-            champ
-            est obligatoire.
-          </ion-label>
-        </div>
         <ion-segment [value]="JSON.stringify(segment.value)" (ionChange)="segmentChange($event, segment.id)">
           <ion-segment-button value="true">Oui</ion-segment-button>
           <ion-segment-button value="false">Non</ion-segment-button>
@@ -55,20 +25,33 @@
       </div>
     </ion-list>
 
-    <div class="warning-container" id="textarea">
-      <ion-textarea [rows]="6" label-placement="floating" fill="outline" [(ngModel)]="internalControlEntry.comment"
-                    name="comment" (ionBlur)="inputBlur($event)" [required]="true">
-        <div slot="label" class="text-label">Observation *</div>
-      </ion-textarea>
-      <ion-label *ngIf="inputIsTouched('comment') && internalControlEntry.comment.length === 0">Ce champ est
-        obligatoire.
-      </ion-label>
-    </div>
+    <ion-input *ngIf="getSegment('professionalcard')?.value === true" name="professionalCardNumber"
+               label-placement="floating" label="Numéro de la carte*"
+               fill="outline" placeholder="CAR-075-2029-12-31-20240123456"
+               (ionInput)="onProfessionalCardInput($event)"
+               (ionBlur)="inputBlur($event)" [(ngModel)]="internalControlEntry.professionalCardNumber"
+               [counter]="true" [maxlength]="30" [required]="true" errorText="Le numéro doit comporter 30 caractères."></ion-input>
+
+    <ion-textarea [rows]="5" [autoGrow]="true" label-placement="floating" label="Observation *" fill="outline"
+                  [(ngModel)]="internalControlEntry.comment"
+                  name="comment" (ionBlur)="inputBlur($event)" [required]="true" errorText="Ce champ est obligatoire.">
+    </ion-textarea>
   </ion-list>
+
+  <footer class="form-actions">
+    <ion-button type="submit" class="submit-button" slot="end"
+                [disabled]="!(internalcontrolForm.valid && (professionalCardNumberLengthIsCorrect()))"
+                (click)="saveInternalControl(internalcontrolForm)">
+      <ion-icon slot="start" [name]="isEdit ? 'checkmark-outline' : 'add-outline'"></ion-icon>
+      <ion-label>{{ isEdit ? "Enregister les modifications" : "Créer l'entrée" }}</ion-label>
+    </ion-button>
+  </footer>
 </form>
 
-<ion-button class="submit-button" slot="end" [disabled]="!(internalcontrolForm.valid && (professionalCardNumberLengthIsCorrect()))"
-            (click)="saveInternalControl(internalcontrolForm)">
-  <ion-icon name="add-outline"></ion-icon>
-  <ion-label>{{ isEdit ? "Modifier l'entrée" : "Créer l'entrée" }}</ion-label>
-</ion-button>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime presentation="date" id="datetime" (ionChange)="dateChange($event)" [showDefaultButtons]="true"
+                  [value]="internalControlEntry.entryDate">
+    </ion-datetime>
+  </ng-template>
+</ion-modal>
