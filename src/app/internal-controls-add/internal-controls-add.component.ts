@@ -33,7 +33,7 @@ export class InternalControlsAddComponent {
   private icService = inject(InternalControlsService);
   private modalController = inject(ModalController);
 
-  private readonly professionalCardGroupSizes = [3, 6, 10, 12, 14];
+  private readonly professionalCardGroupSizes = [4, 11, 14, 16];
 
   constructor() {
   }

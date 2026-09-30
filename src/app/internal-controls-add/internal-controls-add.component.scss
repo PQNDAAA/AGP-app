@@ -1,12 +1,24 @@
-//List
-.form-list {
+.ic-form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px; //ESPACE ENTRE ITEMS
-  padding: 16px;
+  gap: 24px; //ESPACE ENTRE ITEMS
+  padding: 20px 16px 24px;
+  margin: 0 auto;
   background-color: var(--app-color-card-background);
+}
+
+.ic-form section { display: contents; }
+
+.section-title{
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--app-color-primary);
+  flex: 1 1 100%;
 }
 
 //Date Container
@@ -22,7 +34,7 @@
   padding: 8px 16px;
   gap: 2px;
 
-  flex: 1 1 100px;
+  flex: 1 1 130px;
 
   .text-label{
     font-size: 11px;
@@ -40,12 +52,14 @@ ion-datetime-button::part(native) {
   color: var(--app-color-text);
 }
 
-#input {
-  flex: 1 1 200px;
+//INPUT , TEXT AREA
+
+ion-textarea {
+  flex: 1 1 100%;
 }
 
-#textarea {
-  flex: 1 1 100%;
+ion-input{
+  flex: 1 1 200px;
 }
 
 ion-input, ion-textarea {
@@ -60,7 +74,6 @@ ion-input, ion-textarea {
 
 //SEGMENT PART
 .segmentList {
-  flex: 1 1 150px;
   background: transparent;
 }
 .segmentItem {
@@ -69,6 +82,8 @@ ion-input, ion-textarea {
   align-items: center;
   justify-content: center;
   gap: 16px;
+
+  flex: 1 1 150px;
 
   .text-label{
     font-size: 13px;
