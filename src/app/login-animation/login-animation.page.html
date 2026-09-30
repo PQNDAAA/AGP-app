@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true" class="animation-content">
+  <div class="animation-wrapper" [class.is-success]="phase === 'success'">
+
+    <!-- HALOS D'ARRIÈRE-PLAN -->
+    <div class="background-glow glow-top" aria-hidden="true"></div>
+    <div class="background-glow glow-bottom" aria-hidden="true"></div>
+
+    <!-- LOGO ANIMÉ -->
+    <div class="logo-stage" aria-hidden="true">
+      <span class="ripple ripple-1"></span>
+      <span class="ripple ripple-2"></span>
+      <span class="ripple ripple-3"></span>
+
+      <svg class="orbit" viewBox="0 0 200 200">
+        <circle class="orbit-track" cx="100" cy="100" r="92"></circle>
+        <circle class="orbit-arc" cx="100" cy="100" r="92"></circle>
+      </svg>
+
+      <div class="logo-disc">
+        <img src="assets/icon/agp_logo.png" alt="" class="animation-logo">
+        <span class="logo-shine"></span>
+      </div>
+
+      <div class="success-badge">
+        <svg viewBox="0 0 52 52">
+          <circle class="success-circle" cx="26" cy="26" r="24"></circle>
+          <path class="success-check" d="M15 27 l7 7 l15 -16"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- TEXTE D'ÉTAT -->
+    <div class="status" role="status" aria-live="polite">
+      <p class="status-subtitle">Espace sécurisé</p>
+      <h1 class="status-title">
+        {{ statusMessage }}<span class="dots" *ngIf="phase === 'loading'" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+      </h1>
+    </div>
+
+    <!-- BARRE DE PROGRESSION -->
+    <div class="progress" aria-hidden="true">
+      <div class="progress-bar" [style.animation-duration.ms]="loadingDuration"></div>
+    </div>
+
+  </div>
+</ion-content>

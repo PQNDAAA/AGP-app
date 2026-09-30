@@ -7,17 +7,21 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
     path: 'internal-controls',
     loadChildren: () => import('./internal-controls/internal-controls.module').then( m => m.InternalControlsPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
+  },
+  {
+    path: 'login-animation',
+    loadChildren: () => import('./login-animation/login-animation.module').then( m => m.LoginAnimationPageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
 
 ];

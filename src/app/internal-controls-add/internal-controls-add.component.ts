@@ -5,11 +5,11 @@ import {
 } from "../interface/internal-control-entry";
 import {FormSegment} from "../interface/form-segment";
 import {FormsModule, NgForm} from "@angular/forms";
-import {InputFocused, inputFocusedDefaultSettings} from "../input-focused";
 import {UtilsService} from "../services/utils/utils-service";
 import {InternalControlsService} from "../services/internal-controls-service";
 import {IonDatetime, IonicModule, ModalController} from "@ionic/angular";
 import {NgForOf, NgIf} from "@angular/common";
+import {InputFocused, inputFocusedDefaultSettings} from "../interface/input-focused";
 
 @Component({
   selector: 'app-internal-controls-add',

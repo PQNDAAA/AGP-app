@@ -9,16 +9,18 @@ import { InternalControlsPageRoutingModule } from './internal-controls-routing.m
 import { InternalControlsPage } from './internal-controls.page';
 import {InternalControlsAddComponent} from "../internal-controls-add/internal-controls-add.component";
 import {InternalControlsViewComponent} from "../internal-controls-view/internal-controls-view.component";
+import {FooterAppComponent} from "../footer-app/footer-app.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    InternalControlsPageRoutingModule,
-    InternalControlsAddComponent,
-    InternalControlsViewComponent
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        InternalControlsPageRoutingModule,
+        InternalControlsAddComponent,
+        InternalControlsViewComponent,
+        FooterAppComponent
+    ],
   declarations: [InternalControlsPage]
 })
 export class InternalControlsPageModule {}

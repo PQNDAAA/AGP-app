@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPagePageRoutingModule } from './login-page-routing.module';
 
 import { LoginPagePage } from './login-page.page';
+import {FooterAppComponent} from "../footer-app/footer-app.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    LoginPagePageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        LoginPagePageRoutingModule,
+        FooterAppComponent
+    ],
   declarations: [LoginPagePage]
 })
 export class LoginPagePageModule {}

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {InternalControlEntry} from "../../interface/internal-control-entry";
 import {Observable} from "rxjs";
 import {Response} from "../../interface/response";
+import {LoginCredentials} from "../../interface/login-credentials";
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,9 @@ export class Api {
 
   updateInternalControl(id : number, internalControl: any): Observable<Response>{
     return this.http.put<Response>(`${this.baseUrl}/app/internalControl/${id}`, internalControl);
+  }
+
+  login(credentials: LoginCredentials): Observable<Response>{
+    return this.http.post<Response>(`${this.baseUrl}/app/login`, credentials);
   }
 }

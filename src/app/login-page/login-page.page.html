@@ -1,12 +1,58 @@
-<ion-content [fullscreen]="true">
-  <div class="center-wrapper">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>CONNEXION</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-  <ion-card-content>
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-wrapper">
+    <header class="login-brand">
+      <ion-img src="assets/icon/agp_logo.png" alt="Logo AGP - Gardien de votre sécurité" class="login-logo"></ion-img>
+    </header>
 
-  </ion-card-content>
+    <ion-card class="login-card">
+      <ion-card-header class="login-card-header">
+        <ion-card-subtitle class="heading-subtitle">Espace sécurisé</ion-card-subtitle>
+        <ion-card-title class="heading-title">Connexion</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <section class="login-form">
+          <h2 class="section-title">Identifiants</h2>
+
+          <ion-input label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
+                     name="email" autocomplete="email" inputmode="email"
+                     [(ngModel)]="credentials.email" [required]="true" [email]="true"
+                     errorText="Veuillez saisir une adresse e-mail valide.">
+            <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+          </ion-input>
+
+          <ion-input label-placement="floating" label="Mot de passe *" fill="outline" type="password"
+                     name="password" autocomplete="current-password"
+                     [(ngModel)]="credentials.password" [required]="true"
+                     errorText="Ce champ est obligatoire.">
+            <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+            <ion-input-password-toggle slot="end" color="medium"></ion-input-password-toggle>
+          </ion-input>
+
+          <div class="login-options">
+            <ion-checkbox name="rememberMe" labelPlacement="end" justify="start"
+                          [(ngModel)]="credentials.rememberMe">
+              Se souvenir de moi
+            </ion-checkbox>
+            <a class="forgot-link" (click)="forgotPassword()">Mot de passe oublié ?</a>
+          </div>
+
+          <div class="warning-container" *ngIf="errorMessage">
+            <ion-icon name="alert-circle-outline" aria-hidden="true"></ion-icon>
+            <ion-label>{{ errorMessage }}</ion-label>
+          </div>
+
+          <ion-button type="submit" expand="block" class="submit-button"
+                      [disabled]="!loginForm.valid || isSubmitting">
+            <ion-spinner *ngIf="isSubmitting" slot="start" name="crescent"></ion-spinner>
+            <ion-icon *ngIf="!isSubmitting" slot="start" name="log-in-outline"></ion-icon>
+            <span>{{ isSubmitting ? 'Connexion en cours…' : 'Se connecter' }}</span>
+          </ion-button>
+          </section>
+        </form>
+      </ion-card-content>
+    </ion-card>
+    <app-footer-app></app-footer-app>
   </div>
 </ion-content>
