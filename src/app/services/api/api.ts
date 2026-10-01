@@ -33,6 +33,10 @@ export class Api {
   }
 
   login(credentials: LoginCredentials): Observable<Response>{
-    return this.http.post<Response>(`${this.baseUrl}/app/login`, credentials);
+    return this.http.post<Response>(`${this.baseUrl}/auth/login`, credentials);
+  }
+
+  register(credentials: any): Observable<Response>{
+    return this.http.post<Response>(`${this.baseUrl}/auth/register`, credentials);
   }
 }
