@@ -11,18 +11,20 @@ const routes: Routes = [
     loadChildren: () => import('./internal-controls/internal-controls.module').then( m => m.InternalControlsPageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
-  },
-  {
     path: 'login-animation',
     loadChildren: () => import('./login-animation/login-animation.module').then( m => m.LoginAnimationPageModule)
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'auth',
     pathMatch: 'full'
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth-page/auth-page.module').then( m => m.AuthPagePageModule)
+  },
+
+
 
 ];
 

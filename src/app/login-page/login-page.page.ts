@@ -2,6 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {LoginCredentials} from "../interface/login-credentials";
 import {NavController} from "@ionic/angular";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -21,6 +22,7 @@ export class LoginPagePage implements OnInit {
   errorMessage = '';
 
   private navCtrl = inject(NavController);
+  private route = inject(ActivatedRoute);
 
   constructor() { }
 
@@ -42,6 +44,10 @@ export class LoginPagePage implements OnInit {
   }
 
   forgotPassword() {
+  }
+
+  async goToRegister(){
+    await this.navCtrl.navigateForward('auth/register');
   }
 
 }

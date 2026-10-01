@@ -1,30 +1,10 @@
-//FOND DE PAGE
-.login-content {
-  --background: linear-gradient(180deg, var(--app-color-card-background) 0%, var(--app-color-background) 65%);
-}
-
 .login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 24px;
-  min-height: 100%;
   max-width: 420px;
   margin: 0 auto;
-  padding: 48px 16px 32px;
-}
-
-//LOGO
-.login-brand {
-  display: flex;
-  justify-content: center;
-}
-
-.login-logo {
-  width: 140px;
-  height: 140px;
-  filter: drop-shadow(0 4px 6px rgba(15, 47, 96, 0.12));
+  padding: 0 12px 0;
 }
 
 //CARTE
@@ -163,3 +143,20 @@ ion-checkbox {
   }
 }
 .submit-button[disabled] {--opacity: 0.45;}
+
+.register-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  .register-text{
+    color: var(--app-color-primary);
+    cursor: pointer;
+
+    &:hover{
+      text-decoration: underline;
+      color: var(--app-color-primary-hover);
+    }
+  }
+}

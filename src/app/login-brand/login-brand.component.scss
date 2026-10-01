@@ -1,0 +1,13 @@
+//LOGO
+.login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+.login-logo {
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 4px 6px rgba(15, 47, 96, 0.12));
+}

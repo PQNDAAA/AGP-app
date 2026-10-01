@@ -57,7 +57,7 @@ $app-card-border: mix($app-navy, $app-white, 18%);
 }
 
 body {
-  background-color: var(--app-color-background);
+  background: linear-gradient(180deg, var(--app-color-card-background) 0%, var(--app-color-background) 65%);
   color: var(--app-color-text);
   font-family: sans-serif; /* Assure une police par défaut */
 }
@@ -71,8 +71,14 @@ body {
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
 
+.auth-content {
+  --background: transparent;
+
+  &::part(scroll){
+    scrollbar-width: none;
+  }
+}
 
 .center-wrapper{
   display: flex;

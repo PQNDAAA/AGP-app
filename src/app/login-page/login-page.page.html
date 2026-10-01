@@ -1,9 +1,5 @@
-<ion-content [fullscreen]="true" class="login-content">
-  <div class="login-wrapper">
-    <header class="login-brand">
-      <ion-img src="assets/icon/agp_logo.png" alt="Logo AGP - Gardien de votre sécurité" class="login-logo"></ion-img>
-    </header>
-
+<ion-content class="auth-content">
+<div class="login-wrapper">
     <ion-card class="login-card">
       <ion-card-header class="login-card-header">
         <ion-card-subtitle class="heading-subtitle">Espace sécurisé</ion-card-subtitle>
@@ -49,10 +45,15 @@
             <ion-icon *ngIf="!isSubmitting" slot="start" name="log-in-outline"></ion-icon>
             <span>{{ isSubmitting ? 'Connexion en cours…' : 'Se connecter' }}</span>
           </ion-button>
+
+            <div class="register-container">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+              <a class="register-text" (click)="goToRegister()">Créer son compte ?</a>
+            </div>
+
           </section>
         </form>
       </ion-card-content>
     </ion-card>
-    <app-footer-app></app-footer-app>
   </div>
 </ion-content>
