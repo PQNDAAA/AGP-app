@@ -44,7 +44,6 @@ export class InternalControlsAddComponent {
 
     if (this.isEdit) {
       await this.icService.modifyInternalControl(this.internalControlEntry);
-      this.isEdit = false;
     } else {
       await this.icService.addInternalControl(this.internalControlEntry);
     }
@@ -121,6 +120,10 @@ export class InternalControlsAddComponent {
 
   async closeModal() {
     await this.modalController.dismiss();
+  }
+
+  onDidDismiss() {
+    this.isEdit = false;
   }
 
   protected readonly JSON = JSON;
