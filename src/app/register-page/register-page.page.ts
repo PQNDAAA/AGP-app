@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
+import {RegisterCredentials} from "../interface/register-credentials";
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-register-page',
@@ -8,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPagePage implements OnInit {
 
+  private navCtrl = inject(NavController);
+
+  credentials: RegisterCredentials = {
+    email: '',
+    password: ''
+  };
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  async backToLogin(){
+    await this.navCtrl.navigateBack("/auth")
   }
 
 }

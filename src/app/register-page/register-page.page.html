@@ -1,3 +1,42 @@
 <ion-content class="auth-content">
+  <div class="register-wrapper">
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Espace sécurisé</ion-card-subtitle>
+    <ion-card-title>Inscription</ion-card-title>
+  </ion-card-header>
 
+  <ion-card-content>
+    <form #registerForm="ngForm">
+    <section>
+      <h2>Identifiants</h2>
+
+      <ion-input label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
+                 name="email" autocomplete="email" inputmode="email" [(ngModel)]="credentials.email" [email]="true"
+                  [required]="true" errorText="Veuillez saisir une adresse e-mail valide.">
+        <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+      </ion-input>
+
+      <ion-input name="password" labelPlacement="floating" label="Mot de passe *" fill="outline"
+                 type="password" [required]="true" autocomplete="current-password" [(ngModel)]="credentials.password"
+                 errorText="Ce champ est obligatoire.">
+        <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-button class="register-submit-button" type="submit" expand="block" [disabled]="!registerForm.valid">
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+        <span>Inscription</span>
+      </ion-button>
+
+      <div class="login-container">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+        <a (click)="backToLogin()">Se connecter</a>
+      </div>
+
+    </section>
+    </form>
+  </ion-card-content>
+</ion-card>
+  </div>
 </ion-content>
