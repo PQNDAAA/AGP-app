@@ -50,14 +50,17 @@ export class InternalControlsViewComponent  implements OnInit {
     const alert = await this.alertController.create({
       header: 'Supprimer le contrôle interne',
       message: 'Êtes-vous sûr de vouloir supprimer ce contrôle interne ?',
+      cssClass: 'app-alert',
       buttons: [
         {
           text: 'Annuler',
           role: 'cancel',
+          cssClass: 'cancel-button'
         },
         {
           text: 'Supprimer',
           role: 'delete',
+          cssClass: 'delete-button',
           handler: async () =>
             await this.deleteInternalControl(targetInternalControl),
         }
