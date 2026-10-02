@@ -1,14 +1,14 @@
 <ion-content class="auth-content">
-<div class="login-wrapper">
-    <ion-card class="login-card">
-      <ion-card-header class="login-card-header">
+<div class="auth-wrapper">
+    <ion-card class="auth-card">
+      <ion-card-header class="auth-card-header">
         <ion-card-subtitle class="heading-subtitle">Espace sécurisé</ion-card-subtitle>
         <ion-card-title class="heading-title">Connexion</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-          <section class="login-form">
+          <section class="auth-form">
           <h2 class="section-title">Identifiants</h2>
 
           <ion-input label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
@@ -26,7 +26,7 @@
             <ion-input-password-toggle slot="end" color="medium"></ion-input-password-toggle>
           </ion-input>
 
-          <div class="login-options">
+          <div class="auth-options">
             <ion-checkbox name="rememberMe" labelPlacement="end" justify="start"
                           [(ngModel)]="credentials.rememberMe">
               Se souvenir de moi
@@ -46,9 +46,9 @@
             <span>{{ isSubmitting ? 'Connexion en cours…' : 'Se connecter' }}</span>
           </ion-button>
 
-            <div class="register-container">
+            <div class="method-container">
               <ion-icon name="arrow-forward-outline"></ion-icon>
-              <a class="register-text" (click)="goToRegister()">Créer son compte ?</a>
+              <a class="method-text" (click)="goToRegister()">Créer son compte ?</a>
             </div>
 
           </section>

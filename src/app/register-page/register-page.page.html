@@ -1,15 +1,15 @@
 <ion-content class="auth-content">
-  <div class="register-wrapper">
-<ion-card>
-  <ion-card-header>
-    <ion-card-subtitle>Espace sécurisé</ion-card-subtitle>
-    <ion-card-title>Inscription</ion-card-title>
+  <div class="auth-wrapper">
+<ion-card class="auth-card">
+  <ion-card-header class="auth-card-header">
+    <ion-card-subtitle class="heading-subtitle">Espace sécurisé</ion-card-subtitle>
+    <ion-card-title class="heading-title">Inscription</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
     <form #registerForm="ngForm">
-    <section>
-      <h2>Identifiants</h2>
+    <section class="auth-form">
+      <h2 class="section-title">Identifiants</h2>
 
       <ion-input label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
                  name="email" autocomplete="email" inputmode="email" [(ngModel)]="credentials.email" [email]="true"
@@ -24,14 +24,14 @@
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
 
-      <ion-button class="register-submit-button" type="submit" expand="block" [disabled]="!registerForm.valid">
+      <ion-button class="submit-button" type="submit" expand="block" [disabled]="!registerForm.valid">
         <ion-icon slot="start" name="log-in-outline"></ion-icon>
         <span>Inscription</span>
       </ion-button>
 
-      <div class="login-container">
+      <div class="method-container">
         <ion-icon name="arrow-forward-outline"></ion-icon>
-        <a (click)="backToLogin()">Se connecter</a>
+        <a class="method-text" (click)="backToLogin()">Se connecter</a>
       </div>
 
     </section>

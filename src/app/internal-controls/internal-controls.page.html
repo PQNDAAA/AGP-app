@@ -5,13 +5,13 @@
         <ion-label class="heading-subtitle">Registre des contrôles internes</ion-label>
         <ion-label class="heading-title">Historique des contrôles</ion-label>
       </div>
-      <ion-badge>{{numberOfIC}} entrées</ion-badge>
+      <ion-badge>{{ numberOfIC }} entrées</ion-badge>
     </header>
-    <ion-card class="control-history-card">
+    <ion-card>
       <app-internal-controls-view></app-internal-controls-view>
     </ion-card>
-    <app-footer-app></app-footer-app>
   </div>
+  <app-footer-app></app-footer-app>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="chevron-up"></ion-icon>

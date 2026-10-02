@@ -96,6 +96,8 @@ ion-card{
   overflow-x: auto;
   border: 1px solid var(--app-color-card-border);
   box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
+  margin: 0;
+  background: var(--app-color-card-background);
 }
 
 //PIED DE PAGE
@@ -109,5 +111,229 @@ ion-card{
 
   ion-icon {
     font-size: 16px;
+  }
+}
+
+//ALERT MODAL
+.app-alert{
+  --max-width: 390px;
+  --backdrop-opacity: 0.4;
+
+  .alert-wrapper{
+    border-radius: 10px;
+    border: 1px solid var(--app-color-card-border);
+    box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
+  }
+
+  .alert-title{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--app-color-primary);
+  }
+
+  .alert-message{
+    padding: 16px 20px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--app-color-text);
+  }
+
+  .alert-button-group{
+    display: flex;
+    gap: 8px;
+    padding: 0 16px 16px;
+    justify-content: center;
+  }
+
+  .alert-button{
+    height: 40px;
+    margin: 0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: none;
+  }
+  //Cancel
+  .cancel-button{
+    color: var(--app-color-primary);
+    background: var(--app-color-secondary);
+    border: 1px solid var(--app-color-border);
+
+    &:hover { background: var(--app-color-secondary-hover); }
+  }
+  //Supprimer
+  .delete-button{
+    color: var(--app-color-text-on-primary);
+    background: var(--app-color-danger);
+    box-shadow: 0 4px 6px rgba(229, 62, 62, 0.2);
+    &:hover { background: #c53030; }
+  }
+}
+
+//INPUT
+ion-input, ion-textarea {
+  font-size: 40px;
+  color: var(--app-color-text);
+  --highlight-color-focused: var(--app-color-primary);
+  --highlight-color-invalid: var(--app-color-danger);
+  --placeholder-color: #94a3b8;
+  --border-color: var(--app-color-border);
+  --border-radius: 8px;
+
+  ion-icon[slot="start"] {
+    margin-inline-end: 8px;
+    font-size: 18px;
+    color: var(--app-color-primary);
+    opacity: 0.7;
+  }
+}
+
+.section-title {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--app-color-primary);
+}
+
+//SUBMIT BUTTON
+.submit-button {
+  margin: 4px 0 0;
+  height: 44px;
+  font-weight: 600;
+  text-transform: none;
+
+  --background: var(--app-color-primary);
+  --color: var(--app-color-text-on-primary);
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
+
+  &:hover {
+    --background: var(--app-color-primary-hover);
+  }
+
+  &:active {
+    --background: var(--app-color-primary-hover);
+  }
+
+  ion-spinner {
+    width: 18px;
+    height: 18px;
+    margin-inline-end: 8px;
+    color: var(--app-color-text-on-primary);
+  }
+}
+.submit-button[disabled] {--opacity: 0.45;}
+
+//LOGIN & REGISTER
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 12px 0;
+}
+
+.auth-card-header {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px 4px;
+  text-align: center;
+
+  .heading-subtitle {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--app-color-text);
+  }
+
+  .heading-title {
+    margin-top: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--app-color-primary);
+  }
+}
+
+//FORMULAIRE
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 4px 8px;
+}
+
+//OPTIONS (SE SOUVENIR / MOT DE PASSE OUBLIÉ)
+.auth-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -4px;
+}
+
+ion-checkbox {
+  font-size: 13px;
+  color: var(--app-color-text);
+  --checkbox-background-checked: var(--app-color-primary);
+  --border-color-checked: var(--app-color-primary);
+  --border-radius: 4px;
+}
+
+.forgot-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--app-color-primary);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--app-color-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+//MESSAGE D'ERREUR
+.warning-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(229, 62, 62, 0.35);
+  border-radius: 8px;
+  background: rgba(229, 62, 62, 0.08);
+  font-size: 13px;
+
+  ion-icon {
+    flex-shrink: 0;
+    font-size: 18px;
+    color: var(--app-color-danger);
+  }
+}
+
+//METHOD TEXT
+.method-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  .method-text{
+    color: var(--app-color-primary);
+    cursor: pointer;
+
+    &:hover{
+      text-decoration: underline;
+      color: var(--app-color-primary-hover);
+    }
   }
 }

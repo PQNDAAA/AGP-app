@@ -18,8 +18,20 @@
 }
 
 .disconnect-button{
-  --background: var(--app-color-primary);
-  margin: 1%;
-  font-weight: 600;
   --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(15, 47, 96, 0.12);
+  --background: var(--app-color-primary);
+
+  margin: 1%;
+
+  font-weight: 600;
+  text-transform: none;
+
+  &:hover {
+    --background: var(--app-color-primary-hover);
+  }
+
+  &:active {
+    --background: var(--app-color-primary-hover);
+  }
 }
