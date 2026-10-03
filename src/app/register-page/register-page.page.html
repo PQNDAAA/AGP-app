@@ -7,7 +7,7 @@
   </ion-card-header>
 
   <ion-card-content>
-    <form #registerForm="ngForm">
+    <form #registerForm="ngForm" (ngSubmit)="register()">
     <section class="auth-form">
       <h2 class="section-title">Identifiants</h2>
 

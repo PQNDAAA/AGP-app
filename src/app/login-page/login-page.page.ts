@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 import {LoginCredentials} from "../interface/login-credentials";
 import {NavController} from "@ionic/angular";
 import {ActivatedRoute, Router} from "@angular/router";
+import {InternalControlsService} from "../services/internal-controls-service";
+import {Api} from "../services/api/api";
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +25,8 @@ export class LoginPagePage implements OnInit {
   errorMessage = '';
 
   private navCtrl = inject(NavController);
-  private route = inject(ActivatedRoute);
+  private api = inject(Api);
+  private internalControlsService = inject(InternalControlsService);
 
   constructor() { }
 
@@ -35,12 +39,22 @@ export class LoginPagePage implements OnInit {
     this.isSubmitting = true;
 
     try {
-      await this.navCtrl.navigateForward('/login-animation');
+      const result = await firstValueFrom(this.api.login(this.credentials));
+
+      if(result.success){
+        localStorage.setItem('token', result.data); //On stocke le token dans le local storage
+        await Promise.all([this.navCtrl.navigateForward('/login-animation'), this.initApp()]);
+      }
     } catch (e) {
-      this.errorMessage = 'Identifiants incorrects. Veuillez réessayer.';
+      console.error('Une erreur est survenue lors de la connexion :',e);
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  async initApp() {
+    console.log('Initializing App...');
+    await this.internalControlsService.initInternalControls();
   }
 
   forgotPassword() {

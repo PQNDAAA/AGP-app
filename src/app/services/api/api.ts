@@ -17,7 +17,7 @@ export class Api {
   constructor() {}
 
    getInternalControls(): Observable<Response>{
-    return this.http.get<Response>(`${this.baseUrl}/app/ic`);
+    return this.http.get<Response>(`${this.baseUrl}/app/internalControls`);
   }
 
   addInternalControl(internalControl: any): Observable<Response>{
@@ -38,5 +38,9 @@ export class Api {
 
   register(credentials: any): Observable<Response>{
     return this.http.post<Response>(`${this.baseUrl}/auth/register`, credentials);
+  }
+
+  me(){
+    return this.http.get(`${this.baseUrl}/auth/me`);
   }
 }

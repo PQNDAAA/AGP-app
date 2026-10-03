@@ -7,19 +7,10 @@ import {InternalControlsService} from "./services/internal-controls-service";
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   private internalControlsService = inject(InternalControlsService);
 
   constructor() {
-  }
-
-  async ngOnInit() {
-    await this.initApp();
-  }
-
-  async initApp() {
-    console.log('Initializing App...');
-    await this.internalControlsService.initInternalControls();
   }
 }
