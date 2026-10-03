@@ -83,7 +83,7 @@ ion-segment-button {
   min-height: 30px;
   font-weight: 600;
   font-size: 12px;
-  --indicator-box-shadow: 0 1px 2px rgba(15, 47, 96, 0.15);
+  --indicator-box-shadow: 0 1px 2px rgb(30 31 34);
 }
 //L'indicateur sur le segment
 ion-segment-button::part(indicator) {
