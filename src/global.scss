@@ -174,24 +174,23 @@ ion-card{
 }
 
 //INPUT
-ion-input, ion-textarea {
-  font-size: 40px;
-  color: var(--app-color-text);
+.app-input, .app-textarea {
+  font-size: 14px;
+  --color: var(--app-color-text);
   --highlight-color-focused: var(--app-color-primary);
   --highlight-color-invalid: var(--app-color-danger);
   --placeholder-color: #94a3b8;
   --border-color: var(--app-color-border);
   --border-radius: 8px;
-
-  ion-icon[slot="start"] {
-    margin-inline-end: 8px;
-    font-size: 18px;
-    color: var(--app-color-primary);
-    opacity: 0.7;
-  }
 }
 
-.section-title {
+.app-input-icon[slot="start"] {
+  font-size: 18px;
+  color: var(--app-color-primary);
+  opacity: 0.7;
+}
+
+h2.section-title {
   margin: 0;
   text-transform: uppercase;
   font-size: 12px;

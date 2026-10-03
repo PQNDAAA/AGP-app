@@ -8,14 +8,14 @@
 
     <ion-input label-placement="floating" label="Nom de l'agent *" fill="outline" name="agent-name"
                [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)"
-               errorText="Ce champ est obligatoire.">
-      <ion-icon slot="start" name="person-outline"></ion-icon>
+               errorText="Ce champ est obligatoire." class="app-input">
+      <ion-icon class="app-input-icon" slot="start" name="person-outline"></ion-icon>
     </ion-input>
 
     <ion-input label-placement="floating" label="Nom du site *" fill="outline" name="domain-name"
                [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)"
-               errorText="Ce champ est obligatoire.">
-      <ion-icon slot="start" name="business-outline"></ion-icon>
+               errorText="Ce champ est obligatoire." class="app-input">
+      <ion-icon class="app-input-icon" slot="start" name="business-outline"></ion-icon>
     </ion-input>
   </section>
 
@@ -29,17 +29,19 @@
         </ion-segment>
       </div>
 
-    <ion-input *ngIf="getSegment('professionalcard')?.value === true" name="professionalCardNumber"
+    <ion-input class="app-input" *ngIf="getSegment('professionalcard')?.value === true" name="professionalCardNumber"
                label-placement="floating" label="Numéro de la carte*"
                fill="outline" placeholder="2026-0087681-CAR-SH-0997931"
                (ionInput)="onProfessionalCardInput($event)"
                (ionBlur)="inputBlur($event)" [(ngModel)]="internalControlEntry.professionalCardNumber"
-               [counter]="true" [minlength]="27" [maxlength]="27" [required]="true" errorText="Le numéro doit comporter 27 caractères."></ion-input>
+               [counter]="true" [minlength]="27" [maxlength]="27" [required]="true" errorText="Le numéro doit comporter 27 caractères.">
+      <ion-icon class="app-input-icon" slot="start" name="card-outline"></ion-icon>
+    </ion-input>
     </section>
 
     <section>
       <h2 class="section-title">Observation</h2>
-      <ion-textarea [rows]="5" [autoGrow]="true" label-placement="floating" label="Observation *" fill="outline"
+      <ion-textarea class="app-textarea" [rows]="5" [autoGrow]="true" label-placement="floating" label="Observation *" fill="outline"
                     [(ngModel)]="internalControlEntry.comment"
                     name="comment" (ionBlur)="inputBlur($event)" [required]="true" errorText="Ce champ est obligatoire.">
       </ion-textarea>

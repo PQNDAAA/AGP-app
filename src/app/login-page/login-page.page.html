@@ -11,18 +11,18 @@
           <section class="auth-form">
           <h2 class="section-title">Identifiants</h2>
 
-          <ion-input label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
+          <ion-input class="app-input" label-placement="floating" label="Adresse e-mail *" fill="outline" type="email"
                      name="email" autocomplete="email" inputmode="email"
                      [(ngModel)]="credentials.email" [required]="true" [email]="true"
                      errorText="Veuillez saisir une adresse e-mail valide.">
-            <ion-icon slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
+            <ion-icon class="app-input-icon" slot="start" name="mail-outline" aria-hidden="true"></ion-icon>
           </ion-input>
 
-          <ion-input label-placement="floating" label="Mot de passe *" fill="outline" type="password"
+          <ion-input class="app-input" label-placement="floating" label="Mot de passe *" fill="outline" type="password"
                      name="password" autocomplete="current-password"
                      [(ngModel)]="credentials.password" [required]="true"
                      errorText="Ce champ est obligatoire.">
-            <ion-icon slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
+            <ion-icon class="app-input-icon" slot="start" name="lock-closed-outline" aria-hidden="true"></ion-icon>
             <ion-input-password-toggle slot="end" color="medium"></ion-input-password-toggle>
           </ion-input>
 
