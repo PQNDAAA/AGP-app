@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {Api} from "../api/api";
 import {firstValueFrom} from "rxjs";
 import {NavController} from "@ionic/angular";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +15,14 @@ export class AuthService {
   async checkToken() {
     try {
       await firstValueFrom(this.api.me());
+      await this.navCtrl.navigateRoot('/home');
     } catch (e) {
-      if(e instanceof HttpErrorResponse && e.status === 401){
-        localStorage.removeItem('token');
-        await this.navCtrl.navigateRoot('/auth');
-      }
+      //401 : déjà géré par l'interceptor (suppression du token + redirection)
     }
   }
 
+  async disconnect() {
+    localStorage.removeItem('token');
+    await this.navCtrl.navigateRoot('/auth');
+  }
 }

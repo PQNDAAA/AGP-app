@@ -43,18 +43,13 @@ export class LoginPagePage implements OnInit {
 
       if(result.success){
         localStorage.setItem('token', result.data); //On stocke le token dans le local storage
-        await Promise.all([this.navCtrl.navigateForward('/login-animation'), this.initApp()]);
+        await this.navCtrl.navigateForward('/login-animation');
       }
     } catch (e) {
       console.error('Une erreur est survenue lors de la connexion :',e);
     } finally {
       this.isSubmitting = false;
     }
-  }
-
-  async initApp() {
-    console.log('Initializing App...');
-    await this.internalControlsService.initInternalControls();
   }
 
   forgotPassword() {

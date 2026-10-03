@@ -1,9 +1,28 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Injectable} from "@angular/core";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
+import {inject, Injectable} from "@angular/core";
+import {NavController} from "@ionic/angular";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private navCtrl = inject(NavController);
+
+  checkReq(req: HttpRequest<any>, next: HttpHandler){
+    return next.handle(req).pipe(catchError(err => {
+      if(err instanceof HttpErrorResponse && err.status === 401){
+        localStorage.removeItem('token');
+        this.navCtrl.navigateRoot('/auth');
+      }
+      return throwError(() => err);
+    }));
+  }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       const token = localStorage.getItem('token');
 
@@ -11,8 +30,8 @@ export class AuthInterceptor implements HttpInterceptor {
         const clone = req.clone({
           headers: req.headers.set('Authorization', `Bearer ${token}`)
         });
-        return next.handle(clone);
+        return this.checkReq(clone, next);
       }
-      return next.handle(req);
+      return this.checkReq(req, next);
     }
 }

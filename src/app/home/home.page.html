@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="header-toolbar">
     <ion-img src="assets/icon/favicon.png" slot="start" class="logo"></ion-img>
-    <ion-button slot="end" class="disconnect-button">
+    <ion-button slot="end" class="disconnect-button" (click)="disconnect()">
       <ion-icon slot="start" name="log-out-outline"></ion-icon>
       <span>Se déconnecter</span>
     </ion-button>
