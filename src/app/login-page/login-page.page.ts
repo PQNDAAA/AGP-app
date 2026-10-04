@@ -42,7 +42,8 @@ export class LoginPagePage implements OnInit {
       const result = await firstValueFrom(this.api.login(this.credentials));
 
       if(result.success){
-        localStorage.setItem('token', result.data); //On stocke le token dans le local storage
+        const storage = this.credentials.rememberMe ? localStorage : sessionStorage;
+        storage.setItem('token', result.data); //On stocke le token dans le local storage
         await this.navCtrl.navigateForward('/login-animation');
       }
     } catch (e) {
