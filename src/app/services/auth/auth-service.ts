@@ -23,6 +23,7 @@ export class AuthService {
 
   async disconnect() {
     localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     await this.navCtrl.navigateRoot('/auth');
   }
 }

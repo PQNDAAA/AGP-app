@@ -43,7 +43,7 @@ export class LoginPagePage implements OnInit {
 
       if(result.success){
         const storage = this.credentials.rememberMe ? localStorage : sessionStorage;
-        storage.setItem('token', result.data); //On stocke le token dans le local storage
+        storage.setItem('token', result.data); //On stocke le token dans le storage
         await this.navCtrl.navigateForward('/login-animation');
       }
     } catch (e) {

@@ -17,6 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(catchError(err => {
       if(err instanceof HttpErrorResponse && err.status === 401){
         localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         this.navCtrl.navigateRoot('/auth');
       }
       return throwError(() => err);
@@ -24,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token') ?? sessionStorage.getItem('token');
 
       if(token){
         const clone = req.clone({
