@@ -41,7 +41,7 @@
 
     <section>
       <h2 class="section-title">Observation</h2>
-      <ion-textarea class="app-textarea" [rows]="5" [autoGrow]="true" label-placement="floating" label="Observation *" fill="outline"
+      <ion-textarea class="app-textarea" [rows]="5" [maxlength]="200" [counter]="true" [autoGrow]="true" label-placement="floating" label="Observation *" fill="outline"
                     [(ngModel)]="internalControlEntry.comment"
                     name="comment" (ionBlur)="inputBlur($event)" [required]="true" errorText="Ce champ est obligatoire.">
       </ion-textarea>
