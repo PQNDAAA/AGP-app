@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {InternalControlsService} from "../services/internal-controls-service";
 import {Api} from "../services/api/api";
 import {firstValueFrom} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login-page',
@@ -46,8 +47,10 @@ export class LoginPagePage implements OnInit {
         storage.setItem('token', result.data); //On stocke le token dans le storage
         await this.navCtrl.navigateForward('/login-animation');
       }
-    } catch (e) {
-      console.error('Une erreur est survenue lors de la connexion :',e);
+    } catch (e: any) {
+      if(e instanceof HttpErrorResponse && e.status === 401) {
+        this.errorMessage = e.error.message;
+      }
     } finally {
       this.isSubmitting = false;
     }
