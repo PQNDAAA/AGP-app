@@ -23,7 +23,7 @@ export class InternalControlsService {
   }
 
   async initInternalControls() {
-    console.log("Initial Controls Initialized...");
+    console.log("Internal Controls Initialized...");
     await this.getInternalControls();
     this.refreshIC();
   }

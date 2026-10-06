@@ -45,12 +45,6 @@
             <ion-icon *ngIf="!isSubmitting" slot="start" name="log-in-outline"></ion-icon>
             <span>{{ isSubmitting ? 'Connexion en cours…' : 'Se connecter' }}</span>
           </ion-button>
-
-            <div class="method-container">
-              <ion-icon name="arrow-forward-outline"></ion-icon>
-              <a class="method-text" (click)="goToRegister()">Créer son compte ?</a>
-            </div>
-
           </section>
         </form>
       </ion-card-content>
