@@ -19,14 +19,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
    checkReq(req: HttpRequest<any>, next: HttpHandler){
     return next.handle(req).pipe(catchError( err => {
-      //NE PAS INCLURE LA PAGE AUTH , A FAIRE
       if(err instanceof HttpErrorResponse && err.status === 401 && !req.url.includes('/auth/login')){
         if(localStorage.getItem('token') || sessionStorage.getItem('token')){
           localStorage.removeItem('token');
           sessionStorage.removeItem('token');
           this.utilsService.createToast('Votre session a expiré, veuillez vous reconnecter.', 2000);
         }
-        this.navCtrl.navigateRoot('/auth');
+        const current = window.location.pathname;
+        if(!current.startsWith('/auth')){
+          this.navCtrl.navigateRoot('/auth');
+          console.log('Redirect to login')
+        }
       } else if(err instanceof HttpErrorResponse && err.status >= 500){
         this.utilsService.createToast('Une erreur est survenue, veuillez réessayer plus tard.', 2000);
       } else if(err instanceof HttpErrorResponse && err.status === 429){
