@@ -7,15 +7,13 @@ import {
 } from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {inject, Injectable} from "@angular/core";
-import {NavController, ToastController} from "@ionic/angular";
+import {NavController} from "@ionic/angular";
 import {UtilsService} from "../utils/utils-service";
-import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private navCtrl = inject(NavController);
   private utilsService = inject(UtilsService);
-  private router = inject(Router);
 
    checkReq(req: HttpRequest<any>, next: HttpHandler){
     return next.handle(req).pipe(catchError( err => {
