@@ -119,6 +119,13 @@ export class InternalControlsService {
     console.log("Refreshing IC...", this.internalControlsSubject.value);
   }
 
+  clearInternalControls() {
+    this.internalControls = [];
+    console.log("Clearing internal controls");
+
+    this.refreshIC();
+  }
+
   convertInternalControl(internalControl: InternalControlEntry): any {
     const {entryDateDisplay, ...payload} = internalControl; // VA SUPPRIMER LA VALEUR (entryDateDisplay) D'UN OBJET ET RECREER UNE INSTANCE
 
