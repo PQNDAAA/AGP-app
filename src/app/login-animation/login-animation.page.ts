@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import {AuthService} from "../services/auth/auth-service";
 
 export type LoginAnimationPhase = 'loading' | 'success';
 
@@ -22,7 +23,7 @@ export class LoginAnimationPage implements OnDestroy {
   private redirectUrl = '/home';
   private timers: ReturnType<typeof setTimeout>[] = [];
 
-  constructor(private navCtrl: NavController, private route: ActivatedRoute) { }
+  constructor(private navCtrl: NavController, private route: ActivatedRoute, private authService: AuthService) { }
 
   ionViewWillEnter() {
     const redirect = this.route.snapshot.queryParamMap.get('redirect');
@@ -51,7 +52,7 @@ export class LoginAnimationPage implements OnDestroy {
   }
 
   private redirect() {
-    this.navCtrl.navigateRoot(this.redirectUrl, { animated: true, animationDirection: 'forward' });
+    this.navCtrl.navigateRoot(this.redirectUrl, { animated: true, animationDirection: 'forward', replaceUrl: true });
   }
 
   private clearTimers() {

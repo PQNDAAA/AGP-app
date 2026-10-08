@@ -9,24 +9,29 @@ import {catchError, Observable, throwError} from "rxjs";
 import {inject, Injectable} from "@angular/core";
 import {NavController} from "@ionic/angular";
 import {UtilsService} from "../utils/utils-service";
+import {InternalControlsService} from "../internal-controls-service";
+import {AuthService} from "../auth/auth-service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private navCtrl = inject(NavController);
   private utilsService = inject(UtilsService);
+  private internalControlsService = inject(InternalControlsService);
+  private authService = inject(AuthService);
 
    checkReq(req: HttpRequest<any>, next: HttpHandler){
     return next.handle(req).pipe(catchError( err => {
       if(err instanceof HttpErrorResponse && err.status === 401 && !req.url.includes('/auth/login')){
         if(localStorage.getItem('token') || sessionStorage.getItem('token')){
+          this.authService.isLoggedIn.set(false);
+          this.internalControlsService.clearInternalControls();
           localStorage.removeItem('token');
           sessionStorage.removeItem('token');
           this.utilsService.createToast('Votre session a expiré, veuillez vous reconnecter.', 2000);
         }
         const current = window.location.pathname;
         if(!current.startsWith('/auth')){
-          this.navCtrl.navigateRoot('/auth');
-          console.log('Redirect to login')
+          this.navCtrl.navigateRoot('/auth', { replaceUrl: true });
         }
       } else if(err instanceof HttpErrorResponse && err.status >= 500){
         this.utilsService.createToast('Une erreur est survenue, veuillez réessayer plus tard.', 2000);

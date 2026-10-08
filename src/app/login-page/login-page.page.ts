@@ -7,6 +7,7 @@ import {InternalControlsService} from "../services/internal-controls-service";
 import {Api} from "../services/api/api";
 import {firstValueFrom} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthService} from "../services/auth/auth-service";
 
 @Component({
   selector: 'app-login-page',
@@ -27,7 +28,7 @@ export class LoginPagePage implements OnInit {
 
   private navCtrl = inject(NavController);
   private api = inject(Api);
-  private internalControlsService = inject(InternalControlsService);
+  private authService = inject(AuthService);
 
   constructor() { }
 
@@ -43,9 +44,10 @@ export class LoginPagePage implements OnInit {
       const result = await firstValueFrom(this.api.login(this.credentials));
 
       if(result.success){
+        this.authService.isLoggedIn.set(true);
         const storage = this.credentials.rememberMe ? localStorage : sessionStorage;
         storage.setItem('token', result.data); //On stocke le token dans le storage
-        await this.navCtrl.navigateForward('/login-animation');
+        await this.navCtrl.navigateForward('/login-animation', { replaceUrl: true });
       }
     } catch (e: any) {
       if(e instanceof HttpErrorResponse && e.status === 401) {

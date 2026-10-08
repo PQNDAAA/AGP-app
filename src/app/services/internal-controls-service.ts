@@ -120,9 +120,10 @@ export class InternalControlsService {
   }
 
   clearInternalControls() {
+    if (this.internalControls.length === 0) {
+      return;
+    }
     this.internalControls = [];
-    console.log("Clearing internal controls");
-
     this.refreshIC();
   }
 
