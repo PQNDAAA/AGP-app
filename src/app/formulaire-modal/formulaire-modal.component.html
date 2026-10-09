@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{isEdit ? "Modification d'une entrée" : "Création d'une entrée"}}</ion-title>
-    <ion-button fill="clear" slot="end" (click)="dismissModal()"><ion-icon name="close" color="danger"></ion-icon></ion-button>
+    <ion-button fill="clear" slot="end" (click)="dismissModal()" class="dismiss-button">
+      <span>Fermer</span>
+      <ion-icon name="close" color="danger"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

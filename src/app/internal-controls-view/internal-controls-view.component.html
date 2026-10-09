@@ -11,6 +11,12 @@
     <ion-col>Observation</ion-col>
   </ion-row>
 
+  <ion-row *ngIf="internalControlsLength === 0" class="elements-row">
+    <ion-col>
+      AUCUN CONTROLE INTERNE
+    </ion-col>
+  </ion-row>
+
   <ng-container *ngFor="let internalControl of internalControls$ | async">
     <ion-row class="elements-row">
       <ion-col>{{ internalControl.entryDateDisplay }}</ion-col>

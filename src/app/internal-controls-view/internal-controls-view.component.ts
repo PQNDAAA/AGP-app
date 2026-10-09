@@ -73,4 +73,8 @@ export class InternalControlsViewComponent  implements OnInit {
     await this.icService.deleteInternalControl(internalControl);
   }
 
+  get internalControlsLength() {
+    return this.icService.icsLength;
+  }
+
 }
