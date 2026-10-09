@@ -8,13 +8,13 @@
 
     <ion-input label-placement="floating" label="Nom de l'agent *" fill="outline" name="agent-name"
                [(ngModel)]="internalControlEntry.agentName" [required]="true" (ionBlur)="inputBlur($event)"
-               errorText="Ce champ est obligatoire." class="app-input">
+               errorText="Ce champ est obligatoire." [minlength]="2" [maxlength]="100" [counter]="true" class="app-input">
       <ion-icon class="app-input-icon" slot="start" name="person-outline"></ion-icon>
     </ion-input>
 
     <ion-input label-placement="floating" label="Nom du site *" fill="outline" name="domain-name"
                [(ngModel)]="internalControlEntry.domainName" [required]="true" (ionBlur)="inputBlur($event)"
-               errorText="Ce champ est obligatoire." class="app-input">
+               errorText="Ce champ est obligatoire." [minlength]="2" [maxlength]="100" [counter]="true" class="app-input">
       <ion-icon class="app-input-icon" slot="start" name="business-outline"></ion-icon>
     </ion-input>
   </section>
