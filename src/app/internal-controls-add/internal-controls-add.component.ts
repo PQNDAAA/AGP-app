@@ -92,8 +92,16 @@ export class InternalControlsAddComponent {
   }
 
 
-  inputBlur(e: any) {
+  inputBlur(e: any, form: NgForm) {
     const inputName = e.target.name;
+    const value : string = e.target.value;
+    const control = form.controls[inputName];
+
+    if(value.length > 0 && value.trim().length === 0){
+      control.setErrors({ whitespace: true });
+      control.markAsTouched();
+    }
+
     this.changeInputStatus(true, inputName);
     console.log(this.inputsFocused);
   }
