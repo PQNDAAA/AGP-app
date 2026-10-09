@@ -20,7 +20,13 @@ export class AuthService {
   async checkToken() {
     try {
       await firstValueFrom(this.api.me());
+
+      const current = window.location.pathname;
       this.isLoggedIn.set(true);
+
+      if(!current.startsWith('/home')){
+        await this.navCtrl.navigateRoot('/home', {replaceUrl : true})
+      }
     } catch (e) {
       this.isLoggedIn.set(false);
       //401 : déjà géré par l'interceptor (suppression du token + redirection)
