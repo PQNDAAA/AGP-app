@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.internalControlsService.clearInternalControls();
           localStorage.removeItem('token');
           sessionStorage.removeItem('token');
-          this.utilsService.createToast('Votre session a expiré, veuillez vous reconnecter.', 2000);
+          this.utilsService.createToast('Votre session a expirée, veuillez vous reconnecter.', 2000);
         }
         const current = window.location.pathname;
         if(!current.startsWith('/auth')){

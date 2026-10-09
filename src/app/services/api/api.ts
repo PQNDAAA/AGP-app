@@ -40,6 +40,10 @@ export class Api {
     return this.http.post<Response>(`${this.baseUrl}/auth/register`, credentials);
   }
 
+  disconnect() {
+    return this.http.post(`${this.baseUrl}/auth/disconnect`, {});
+  }
+
   me(){
     return this.http.get(`${this.baseUrl}/auth/me`);
   }

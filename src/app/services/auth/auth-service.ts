@@ -34,10 +34,15 @@ export class AuthService {
   }
 
   async disconnect() {
-    this.isLoggedIn.set(false);
-    this.internalControlsService.clearInternalControls();
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
-    await this.navCtrl.navigateRoot('/auth', { replaceUrl: true });
+    try{
+      await firstValueFrom(this.api.disconnect());
+    } catch (e) {
+    } finally {
+      this.isLoggedIn.set(false);
+      this.internalControlsService.clearInternalControls();
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      await this.navCtrl.navigateRoot('/auth', { replaceUrl: true });
+    }
   }
 }
