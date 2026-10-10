@@ -35,12 +35,16 @@ export class InternalControlsAddComponent {
 
   private readonly professionalCardGroupSizes = [4, 11, 14, 16];
 
+  isSubmitted = false;
+
   constructor() {
   }
 
   async saveInternalControl(form: NgForm) {
     if (!form.valid) return;
     this.internalControlEntry.entryDateDisplay = this.utilsService.convertISOtoLocaleDateString(this.internalControlEntry.entryDate);
+
+    this.isSubmitted = true;
 
     if (this.isEdit) {
       await this.icService.modifyInternalControl(this.internalControlEntry);
@@ -128,10 +132,6 @@ export class InternalControlsAddComponent {
 
   async closeModal() {
     await this.modalController.dismiss();
-  }
-
-  onDidDismiss() {
-    this.isEdit = false;
   }
 
   protected readonly JSON = JSON;

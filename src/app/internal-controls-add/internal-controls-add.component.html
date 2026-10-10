@@ -1,4 +1,4 @@
-<form #internalcontrolForm="ngForm" class="ic-form">
+<form #internalcontrolForm="ngForm" class="ic-form" (ngSubmit)="saveInternalControl(internalcontrolForm)">
   <section>
     <h2 class="section-title">Contexte de contrôle</h2>
     <div class="date-container">
@@ -49,8 +49,7 @@
 
   <footer class="form-actions">
     <ion-button type="submit" class="submit-button" slot="end"
-                [disabled]="!internalcontrolForm.valid"
-                (click)="saveInternalControl(internalcontrolForm)">
+                [disabled]="!internalcontrolForm.valid || isSubmitted">
       <ion-icon slot="start" [name]="isEdit ? 'checkmark-outline' : 'add-outline'"></ion-icon>
       <span>{{ isEdit ? "Enregistrer les modifications" : "Créer l'entrée" }}</span>
     </ion-button>
