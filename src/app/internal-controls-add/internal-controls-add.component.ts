@@ -116,16 +116,6 @@ export class InternalControlsAddComponent {
     targetValue.touched = newValue;
   }
 
-  inputIsTouched(inputName: string): boolean {
-    const targetValue = this.inputsFocused.find(value => value.name === inputName);
-    if (!targetValue) return false;
-    return targetValue.touched;
-  }
-
-  professionalCardNumberLengthIsCorrect(): boolean {
-    return this.internalControlEntry.professionalCardNumber ? this.internalControlEntry.professionalCardNumber.length === 30 : true;
-  }
-
   getSegment(name: string): FormSegment | undefined {
     return this.internalControlEntry.booleans.find(segment => segment.name === name);
   }

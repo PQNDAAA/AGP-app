@@ -70,6 +70,8 @@ export class InternalControlsService {
       internalControl.id = response.data.id;
       this.internalControls.push(internalControl);
       this.refreshIC();
+
+      this.utilsService.createToast('Le contrôle interne a bien été ajouté.', 1500);
     } catch (e) {
       console.error('Erreur lors de l ajout du contrôle interne : ', e);
     }
@@ -105,6 +107,8 @@ export class InternalControlsService {
 
       this.internalControls = this.internalControls.map(ic => ic.id === internalControl.id ? internalControl : ic);
       this.refreshIC();
+
+      this.utilsService.createToast('Le contrôle interne a bien été modifié.', 1500);
     } catch (e) {
       console.error('Erreur lors de la modification du contrôle interne : ', e);
     }
