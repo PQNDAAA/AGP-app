@@ -71,7 +71,6 @@ export class PdfExport {
       }
       //Mode web
     } else {
-      console.log("Mode web");
       await pdfDocGenerator.download(fileName);
     }
   }

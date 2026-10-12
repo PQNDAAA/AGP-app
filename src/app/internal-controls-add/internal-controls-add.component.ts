@@ -46,12 +46,18 @@ export class InternalControlsAddComponent {
 
     this.isSubmitted = true;
 
+    let success : boolean;
     if (this.isEdit) {
-      await this.icService.modifyInternalControl(this.internalControlEntry);
+      success = await this.icService.modifyInternalControl(this.internalControlEntry);
     } else {
-      await this.icService.addInternalControl(this.internalControlEntry);
+      success = await this.icService.addInternalControl(this.internalControlEntry);
     }
-    await this.closeModal();
+
+    if(!success) {
+      this.isSubmitted = false;
+      return;
+    }
+      await this.closeModal();
   }
 
   dateChange(e: any) {
@@ -66,8 +72,6 @@ export class InternalControlsAddComponent {
     if (!targetFormSegment) return;
 
     targetFormSegment.value = value;
-
-    console.log(this.internalControlEntry.booleans);
   }
 
 
@@ -77,8 +81,6 @@ export class InternalControlsAddComponent {
 
     let startIndex = 0;
     let index = 0;
-
-    console.log("VALEUR INITIALE: " + rawValue);
 
     for (const size of this.professionalCardGroupSizes) {
       if (size >= rawValue.length){
@@ -91,7 +93,6 @@ export class InternalControlsAddComponent {
 
       if (rawValue.length <= this.professionalCardGroupSizes[index] || index >= this.professionalCardGroupSizes.length) formattedValue += rawValue.slice(startIndex);
     }
-    console.log("Valeur formatée: ", formattedValue);
     e.target.value = formattedValue;
   }
 
@@ -107,7 +108,6 @@ export class InternalControlsAddComponent {
     }
 
     this.changeInputStatus(true, inputName);
-    console.log(this.inputsFocused);
   }
 
   changeInputStatus(newValue: boolean, inputName: any) {

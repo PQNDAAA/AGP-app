@@ -23,16 +23,15 @@ export class InternalControlsService {
   }
 
   async initInternalControls() {
-    console.log("Internal Controls Initialized...");
-    await this.getInternalControls();
+    const success = await this.getInternalControls();
+    if(!success) return;
+
     this.refreshIC();
   }
 
-  async getInternalControls() {
+  async getInternalControls() : Promise<boolean> {
     try {
       const response = await firstValueFrom(this.api.getInternalControls());
-
-      if (!response.success) return;
 
       const newInternalControls: InternalControlEntry[] = [];
 
@@ -50,22 +49,21 @@ export class InternalControlsService {
           comment: internalControl.comment,
           professionalCardNumber: internalControl.professionalcardnumber,
         };
-        console.log(internalControl);
         newInternalControls.push(targetInternalControl);
       }
       this.internalControls = newInternalControls;
     } catch (e) {
       console.error('Erreur lors de la récupération des contrôles internes : ', e);
+      return false;
     }
+    return true;
   }
 
 
-  async addInternalControl(internalControl: InternalControlEntry) {
+  async addInternalControl(internalControl: InternalControlEntry) : Promise<boolean> {
     try {
       const convertedInternalControl = this.convertInternalControl(internalControl);
       const response = await firstValueFrom(this.api.addInternalControl(convertedInternalControl));
-      if (!response.success) return;
-      console.log(response);
 
       internalControl.id = response.data.id;
       this.internalControls.push(internalControl);
@@ -74,36 +72,45 @@ export class InternalControlsService {
       this.utilsService.createToast('Le contrôle interne a bien été ajouté.', 1500);
     } catch (e) {
       console.error('Erreur lors de l ajout du contrôle interne : ', e);
+      return false;
     }
+    return true;
   }
 
-  async deleteInternalControl(target: InternalControlEntry) {
+  async deleteInternalControl(target: InternalControlEntry): Promise<boolean> {
     try {
       if (!target.id) {
         console.log("ID is undefined or null");
-        return;
+        return false;
       }
       const response = await firstValueFrom(this.api.deleteInternalControl(target.id));
-      if (!response.success) return;
-      console.log(response);
+
+      if(!response.success){
+        this.utilsService.createToast(response.message,2000);
+      }
 
       this.internalControls = this.internalControls.filter(ic => ic.id !== target.id);
       this.refreshIC();
     } catch (e) {
       console.error('Erreur lors de la suppression du contrôle interne : ', e);
+      return false;
     }
+    return true;
   }
 
-  async modifyInternalControl(internalControl: InternalControlEntry) {
+  async modifyInternalControl(internalControl: InternalControlEntry) : Promise<boolean> {
     try {
       if (!internalControl.id) {
         console.error("ID is undefined or null");
-        return;
+        return false;
       }
       const convertedInternalControl = this.convertInternalControl(internalControl);
       const response = await firstValueFrom(this.api.updateInternalControl(internalControl.id, convertedInternalControl));
-      if (!response.success) return;
-      console.log(response);
+
+      if(!response.success){
+        this.utilsService.createToast(response.message,2000);
+        return false;
+      }
 
       this.internalControls = this.internalControls.map(ic => ic.id === internalControl.id ? internalControl : ic);
       this.refreshIC();
@@ -111,7 +118,9 @@ export class InternalControlsService {
       this.utilsService.createToast('Le contrôle interne a bien été modifié.', 1500);
     } catch (e) {
       console.error('Erreur lors de la modification du contrôle interne : ', e);
+      return false;
     }
+    return true;
   }
 
   get icsLength() {
@@ -120,7 +129,6 @@ export class InternalControlsService {
 
   refreshIC() {
     this.internalControlsSubject.next(this.internalControls);
-    console.log("Refreshing IC...", this.internalControlsSubject.value);
   }
 
   clearInternalControls() {

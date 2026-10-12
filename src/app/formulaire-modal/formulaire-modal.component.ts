@@ -26,7 +26,6 @@ export class FormulaireModalComponent implements OnInit{
 
   ngOnInit() {
     this.localInternalControlEntry = structuredClone(this.internalControlEntry);
-    console.log(this.localInternalControlEntry);
   }
 
   async dismissModal() {

@@ -21,7 +21,6 @@ export class HomePage implements OnInit {
   }
 
   async initApp() {
-    console.log('Initializing App...');
     await this.internalControlsService.initInternalControls();
   }
 

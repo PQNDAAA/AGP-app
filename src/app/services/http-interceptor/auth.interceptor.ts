@@ -7,7 +7,7 @@ import {
 } from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {inject, Injectable} from "@angular/core";
-import {NavController} from "@ionic/angular";
+import {ModalController, NavController} from "@ionic/angular";
 import {UtilsService} from "../utils/utils-service";
 import {InternalControlsService} from "../internal-controls-service";
 import {AuthService} from "../auth/auth-service";
@@ -18,6 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private utilsService = inject(UtilsService);
   private internalControlsService = inject(InternalControlsService);
   private authService = inject(AuthService);
+  private modalCtrl = inject(ModalController);
 
    checkReq(req: HttpRequest<any>, next: HttpHandler){
     return next.handle(req).pipe(catchError( err => {
@@ -29,6 +30,8 @@ export class AuthInterceptor implements HttpInterceptor {
           sessionStorage.removeItem('token');
           this.utilsService.createToast('Votre session est expirée, veuillez vous reconnecter.', 2000);
         }
+        this.modalCtrl.getTop().then(modal => modal?.dismiss());
+
         const current = window.location.pathname;
         if(!current.startsWith('/auth')){
           this.navCtrl.navigateRoot('/auth', { replaceUrl: true });
@@ -39,6 +42,8 @@ export class AuthInterceptor implements HttpInterceptor {
         this.utilsService.createToast('Trop de tentatives, veuillez réessayer dans quelques minutes.', 2000);
       } else if(err instanceof HttpErrorResponse && err.status === 0){
         this.utilsService.createToast('Erreur réseau, veuillez vérifier votre connexion internet.', 2000);
+      } else if(err instanceof HttpErrorResponse && !req.url.includes('/auth/login')) {
+        this.utilsService.createToast(err.error?.message ?? 'La requête a été refusée.', 2000);
       }
       return throwError(() => err);
     }));
