@@ -6,6 +6,7 @@ import {Directory, Filesystem} from "@capacitor/filesystem";
 import {Share} from "@capacitor/share";
 import {InternalControlsService} from "../internal-controls-service";
 import {FormSegment, formSegmentDefaultSettings} from "../../interface/form-segment";
+import {UtilsService} from "../utils/utils-service";
 
 (<any>pdfMake).addVirtualFileSystem(pdfFonts);
 
@@ -17,6 +18,7 @@ export class PdfExport {
 
   private platform = inject(Platform);
   private internalControlsService = inject(InternalControlsService);
+  private utilsService = inject(UtilsService);
 
   private formSegment: FormSegment[] = formSegmentDefaultSettings();
 
@@ -66,8 +68,12 @@ export class PdfExport {
           dialogTitle: 'Ouvrir ou partager le document PDF'
         });
 
-      } catch (e) {
+      } catch (e: any) {
+        // Fermer la fenêtre de partage n'est pas une erreur
+        if (e?.message === 'Share canceled') return;
+
         console.error("Erreur lors de l'enregistrement ou du partage du PDF natif", e);
+        this.utilsService.createToast("Impossible d'enregistrer le PDF.",2500);
       }
       //Mode web
     } else {
