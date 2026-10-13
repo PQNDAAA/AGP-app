@@ -2,10 +2,18 @@ ion-content{
   --background: var(--app-color-card-background);
 }
 
+ion-toolbar{
+}
+
 ion-title{
+  position: static;
+  padding-inline: 20px;
+
   font-size: 20px;
   font-weight: 600;
   color: var(--app-color-primary);
+  border: 1px solid black;
+  text-align: left;
 }
 
 .dismiss-button{
