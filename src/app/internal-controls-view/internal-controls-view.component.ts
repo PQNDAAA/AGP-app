@@ -1,6 +1,6 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {AlertController, IonicModule, ModalController} from "@ionic/angular";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {FormSegment, formSegmentDefaultSettings} from "../interface/form-segment";
 import {InternalControlEntry} from "../interface/internal-control-entry";
 import {InternalControlsService} from "../services/internal-controls-service";
@@ -15,7 +15,8 @@ import {FormulaireModalComponent} from "../formulaire-modal/formulaire-modal.com
     IonicModule,
     NgForOf,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    NgStyle
   ],
   standalone: true
 })
