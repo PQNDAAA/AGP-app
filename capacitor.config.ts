@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'agp_app',
+  appId: 'fr.dgsd.agpapp',
+  appName: 'AGP',
   webDir: 'www'
 };
 

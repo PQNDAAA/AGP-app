@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package fr.dgsd.agpapp;
 
 import com.getcapacitor.BridgeActivity;
 
